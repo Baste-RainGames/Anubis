@@ -14,7 +14,7 @@ public class DragAndDropObjects : MonoBehaviour {
     private Rigidbody dragged;
 
     void Update() {
-        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        var ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         var plane = new Plane(Vector3.back, dragger.transform.position);
 
         if (plane.Raycast(ray, out var distance)) {
@@ -49,18 +49,22 @@ public class DragAndDropObjects : MonoBehaviour {
         if (list.Count > 0) {
             var attachTo = list[0].gameObject.GetComponent<RectTransform>();
 
-            var screenPos = uiCamera.WorldToScreenPoint(attachTo.position);
-            var worldPos = mainCamera.ScreenToWorldPoint(screenPos);
+            var ray = mainCamera.ScreenPointToRay(uiCamera.WorldToScreenPoint(attachTo.position));
+            var plane = new Plane(Vector3.back, dragger.transform.position);
 
-            worldPos.z = dragged.transform.position.z;
-            dragged.velocity = Vector3.zero;
-            dragged.isKinematic = true;
-            dragged.MovePosition(worldPos);
+            if (plane.Raycast(ray, out var distance)) {
+                var worldPos = ray.origin + distance * ray.direction;
+                dragged.velocity = Vector3.zero;
+                dragged.isKinematic = true;
+                dragged.MovePosition(worldPos);
+            }
+
         }
     }
 
     private void Drag(Rigidbody rb) {
         dragged = rb;
+        dragged.isKinematic = false;
         joint = dragger.gameObject.AddComponent<SpringJoint>();
 
         var pos = dragger.transform.position;
