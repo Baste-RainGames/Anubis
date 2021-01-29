@@ -1,0 +1,18 @@
+Library/
+Logs/
+Temp/
+Build/
+Builds/
+Recordings/
+UserSettings/
+
+*.sln
+*.csproj
+
+# Rider meta files
+.idea/
+obj/
+
+.vs/
+
+/Anubis.sln.DotSettings.user
