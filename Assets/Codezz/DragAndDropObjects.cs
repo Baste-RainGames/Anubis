@@ -15,29 +15,48 @@ public class DragAndDropObjects : MonoBehaviour {
 
     void Update() {
         var ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        PositionDraggerUnderMouse(ray);
+
+        if (Input.GetMouseButtonDown(0))
+            TryDrag(ray);
+
+        if (joint && Input.GetMouseButtonUp(0))
+            LetGoOfDragged();
+    }
+
+    private void PositionDraggerUnderMouse(Ray ray) {
         var plane = new Plane(Vector3.back, dragger.transform.position);
 
         if (plane.Raycast(ray, out var distance)) {
             var hitPoint = ray.origin + distance * ray.direction;
             dragger.MovePosition(hitPoint);
         }
-
-        if (Input.GetMouseButtonDown(0))
-            TryDrag(ray);
-
-        if (joint && Input.GetMouseButtonUp(0))
-            HandleDraggedLetGoOf();
     }
 
     private void TryDrag(Ray ray) {
         if (Physics.Raycast(ray, out var hit)) {
             if (hit.rigidbody) {
-                Drag(hit.rigidbody);
+                StartDragging(hit.rigidbody);
             }
         }
     }
 
-    private void HandleDraggedLetGoOf() {
+    private void StartDragging(Rigidbody rb) {
+        dragged = rb;
+        dragged.isKinematic = false;
+        joint = dragger.gameObject.AddComponent<SpringJoint>();
+
+        var pos = dragger.transform.position;
+        pos.y = rb.transform.position.y;
+        dragger.position = pos;
+
+        joint.connectedBody = rb;
+        joint.autoConfigureConnectedAnchor = false;
+
+        joint.connectedAnchor = Vector3.zero;
+    }
+
+    private void LetGoOfDragged() {
         Destroy(joint);
 
         PointerEventData dummyEventData = new PointerEventData(FindObjectOfType<EventSystem>());
@@ -60,20 +79,5 @@ public class DragAndDropObjects : MonoBehaviour {
             }
 
         }
-    }
-
-    private void Drag(Rigidbody rb) {
-        dragged = rb;
-        dragged.isKinematic = false;
-        joint = dragger.gameObject.AddComponent<SpringJoint>();
-
-        var pos = dragger.transform.position;
-        pos.y = rb.transform.position.y;
-        dragger.position = pos;
-
-        joint.connectedBody = rb;
-        joint.autoConfigureConnectedAnchor = false;
-
-        joint.connectedAnchor = Vector3.zero;
     }
 }
