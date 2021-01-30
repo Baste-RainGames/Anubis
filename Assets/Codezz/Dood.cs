@@ -5,7 +5,7 @@ using UnityEngine.AI;
 using static BT<Dood.DoodAIInput, Dood.DoodAIOutput>;
 
 [SelectionBase]
-public class Dood : MonoBehaviour {
+public class /*HTML Rulez */Dood : MonoBehaviour {
 
     private BehaviourTree bt;
     private NavMeshAgent navMeshAgent;

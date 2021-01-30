@@ -9,10 +9,17 @@ public class Player : MonoBehaviour
 
     Rigidbody rb;
     Camera cam;
-    Vector2 inputAxis;
     public Transform playerModel;
     public Animator anim;
-
+    #region Inputs
+    Vector2 inputAxis;
+    bool leftAttackDown;
+    bool leftAttackUp;
+    bool leftAttackHeld;
+    bool rightAttackDown;
+    bool rightAttackUp;
+    bool rightAttackHeld;
+    #endregion
 
     private void Awake()
     {
@@ -20,14 +27,24 @@ public class Player : MonoBehaviour
     }
     private void Start()
     {
-
+        cam = Camera.main;
     }
 
     public void Update()
     {
-        inputAxis = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        AssignInputs();
     }
 
+    private void AssignInputs()
+    {
+        inputAxis = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        leftAttackDown = Input.GetMouseButtonDown(0);
+        leftAttackUp = Input.GetMouseButtonUp(0);
+        leftAttackHeld = Input.GetMouseButton(0);
+        rightAttackDown = Input.GetMouseButtonDown(1);
+        rightAttackUp = Input.GetMouseButtonUp(1);
+        rightAttackHeld = Input.GetMouseButton(1);
+    }
 
     private void FixedUpdate()
     {
