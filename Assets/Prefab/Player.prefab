@@ -418,14 +418,6 @@ MonoBehaviour:
   maxSpeed: 5
   playerModel: {fileID: 6691563298679777490}
   anim: {fileID: 6740935501803764694}
-  heldItemLeft: {fileID: 0}
-  heldItemRight: {fileID: 0}
-  equipedItemHead: {fileID: 0}
-  equipedItemTorso: {fileID: 0}
-  equipedItemArmLeft: {fileID: 0}
-  equipedItemArmRight: {fileID: 0}
-  equipedItemLegLeft: {fileID: 0}
-  equipedItemLegRight: {fileID: 0}
   leftHandSlot: {fileID: 6691563298146351592}
   rightHandSlot: {fileID: 6691563297113036281}
   headSlot: {fileID: 4514579525142198437}

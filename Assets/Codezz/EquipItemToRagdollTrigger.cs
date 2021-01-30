@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class EquipItemToRagdollTrigger : MonoBehaviour {
 
+    public ItemSlotID slot;
+
     public LostAndFoundObject Equipped { get; private set; }
     private DragAndDropObjects dragController;
     private List<LostAndFoundObject> ignoreUntilExited = new List<LostAndFoundObject>();
