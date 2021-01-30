@@ -12,6 +12,7 @@ public class Dood : MonoBehaviour {
     private Player player;
 
     public float attackRange;
+    public float visionRange;
 
     private void Start() {
         player = FindObjectOfType<Player>();
@@ -44,9 +45,8 @@ public class Dood : MonoBehaviour {
     }
 
     private void UpdateAIData(ref DoodAIInput btData) {
-        if (player == null) {
+        if (player == null)
             player = FindObjectOfType<Player>();
-        }
 
         btData.playerExists = player != null;
         if (player != null)
@@ -54,6 +54,7 @@ public class Dood : MonoBehaviour {
 
         btData.doodPos = transform.position;
         btData.doodAttackRange = attackRange;
+        btData.doodVisionRange = visionRange;
     }
 
     private void ApplyAICommand(DoodAIOutput btCommand) {
@@ -74,6 +75,7 @@ public class Dood : MonoBehaviour {
         public Vector3 doodPos;
         public bool playerExists;
         public float doodAttackRange;
+        public float doodVisionRange;
     }
 
     public struct DoodAIOutput : BTCommand {
@@ -103,31 +105,40 @@ public class Dood : MonoBehaviour {
             if (data.agent.pathPending)
                 return BTState.Continue;
 
-            if (data.agent.isPathStale)
+            if (data.agent.isPathStale || !data.agent.hasPath)
+                return BTState.Failure;
+
+            if (data.agent.remainingDistance <= data.agent.stoppingDistance)
+                return BTState.Success;
+
+            return BTState.Continue;
         }
 
         public override void ShowAsString(Action<BTNode, string> AppendLine, Action IncreaseIndentation, Action DecreaseIndentation) {
-
+            AppendLine(this, "Move to player");
         }
     }
 
     public class CanSeePlayerNode : BTNode {
         protected override BTState OnTick() {
-
+            if (Vector3.Distance(data.playerPos, data.doodPos) < data.doodVisionRange)
+                return BTState.Success;
+            return BTState.Failure;
         }
 
         public override void ShowAsString(Action<BTNode, string> AppendLine, Action IncreaseIndentation, Action DecreaseIndentation) {
-
+            AppendLine(this, "Can see Player");
         }
     }
 
     public class AttackPlayerNode : BTNode {
         protected override BTState OnTick() {
-
+            Debug.Log("Attack, yo!");
+            return BTState.Success;
         }
 
         public override void ShowAsString(Action<BTNode, string> AppendLine, Action IncreaseIndentation, Action DecreaseIndentation) {
-
+            AppendLine(this, "Attack");
         }
     }
 
@@ -148,7 +159,7 @@ public class Dood : MonoBehaviour {
 
     public class MoveRandomNode : BTNode {
         protected override BTState OnTick() {
-
+            return BTState.Continue;
         }
 
         public override void ShowAsString(Action<BTNode, string> AppendLine, Action IncreaseIndentation, Action DecreaseIndentation) {
