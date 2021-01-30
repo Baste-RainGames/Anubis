@@ -23,7 +23,8 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
             Selector(
                 Sequence(
                     PlayerInAttackRange(),
-                    Attack()
+                    Attack(),
+                    Wait(1f)
                 ),
                 Sequence(
                     CanSeePlayer(),
@@ -31,7 +32,7 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
                 ),
                 Sequence(
                     MoveRandom(),
-                    WaitRandom(3, 5)
+                    WaitRandom(2, 2.5f)
                 )
             )
         );
