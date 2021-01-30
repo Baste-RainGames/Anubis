@@ -5,8 +5,7 @@ using Sirenix.OdinInspector;
 
 public class ItemSlot : MonoBehaviour
 {
-    [ShowInInspector]
-    public static bool showSlotGizmos;
+    public bool showSlotGizmos;
 
     //Todo: Om vi legger til Offset per item, her skal Item referansen for preview
     public Item exampleItem; 

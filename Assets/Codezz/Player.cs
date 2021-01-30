@@ -44,6 +44,19 @@ public class Player : MonoBehaviour
     [InlineEditor]
     public ItemSlot leftHandSlot, rightHandSlot, headSlot, torsoSlot, leftArmSlot, rightArmSlot, leftLegSlot, rightLegSlot;
 
+    [FoldoutGroup("Item Slots")]
+    [Button]
+    void ToggleAllGizmos(bool isShown = true)
+    {
+        leftHandSlot.showSlotGizmos = isShown;
+        rightHandSlot.showSlotGizmos = isShown;
+        headSlot.showSlotGizmos = isShown;
+        torsoSlot.showSlotGizmos = isShown;
+        leftArmSlot.showSlotGizmos = isShown;
+        rightArmSlot.showSlotGizmos = isShown;
+        leftLegSlot.showSlotGizmos = isShown;
+        rightLegSlot.showSlotGizmos = isShown;
+    }
     #endregion
     private void Awake()
     {
