@@ -44,7 +44,9 @@ public class Player : MonoBehaviour
     [InlineEditor]
     public ItemSlot leftHandSlot, rightHandSlot, headSlot, torsoSlot, leftArmSlot, rightArmSlot, leftLegSlot, rightLegSlot;
 
-    #endregion
+    public int MaxHealth => 10;
+
+#endregion
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
