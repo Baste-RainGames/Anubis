@@ -60,7 +60,6 @@ public class Player : MonoBehaviour
     #endregion
     public int MaxHealth => 10;
 
-#endregion
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();

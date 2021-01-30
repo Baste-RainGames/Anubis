@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using UnityEditor;
 
 public class ItemSlot : MonoBehaviour
 {
@@ -9,6 +10,12 @@ public class ItemSlot : MonoBehaviour
 
     //Todo: Om vi legger til Offset per item, her skal Item referansen for preview
     public Item exampleItem; 
+
+    [Button()]
+    void SelectMe()
+    {
+        Selection.activeTransform = transform;
+    }
     GameObject exampleMesh => exampleItem.itemPrefab;
     private void OnDrawGizmos()
     {
