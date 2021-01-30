@@ -59,6 +59,7 @@ public class Player : MonoBehaviour
     }
     #endregion
     public int MaxHealth => 10;
+    public int currentHealth;
 
 #endregion
     private void Awake()
@@ -69,6 +70,7 @@ public class Player : MonoBehaviour
     {
         cam = Camera.main;
 
+        currentHealth = MaxHealth;
         if (!FindObjectOfType<HPUI>())
             Instantiate(Resources.Load("HP Canvas"));
     }
