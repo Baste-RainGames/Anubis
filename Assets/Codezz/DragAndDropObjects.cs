@@ -3,13 +3,12 @@ using UnityEngine;
 public class DragAndDropObjects : MonoBehaviour {
 
     public Camera mainCamera;
-    public float equipDistance;
 
     public int numItemsToSpawn;
     public LostAndFoundObject lostAndFoundPrefab;
 
     private TargetJoint2D joint;
-    private Rigidbody2D dragged;
+    private LostAndFoundObject dragged;
 
     private void Start() {
         var items = Resources.LoadAll<Item>("Itemz");
@@ -68,14 +67,24 @@ public class DragAndDropObjects : MonoBehaviour {
     private void TryStartDrag(Vector2 mouseWorldPos) {
         var hit = Physics2D.OverlapCircle(mouseWorldPos, .1f);
         if (hit) {
-            StartDragging(hit.attachedRigidbody, mouseWorldPos);
+            var lfo = hit.gameObject.GetComponent<LostAndFoundObject>();
+            if (lfo)
+                StartDragging(lfo, mouseWorldPos);
+            else {
+                var slot = hit.gameObject.GetComponent<EquipItemToRagdollTrigger>();
+                if (slot && slot.Equipped) {
+                    var item = slot.Equipped;
+                    slot.LetGoOfEquipped(Vector2.zero);
+                    StartDragging(item, mouseWorldPos);
+                }
+            }
+
         }
     }
 
-    private void StartDragging(Rigidbody2D rb, Vector2 mouseWorldPos) {
-        dragged = rb;
+    private void StartDragging(LostAndFoundObject obj, Vector2 mouseWorldPos) {
+        dragged = obj;
         dragged.gameObject.layer = LayerMask.NameToLayer("Dragged");
-        dragged.isKinematic = false;
         joint = dragged.gameObject.AddComponent<TargetJoint2D>();
         joint.autoConfigureTarget = false;
         joint.target = mouseWorldPos;
@@ -96,6 +105,12 @@ public class DragAndDropObjects : MonoBehaviour {
         if (debugRay.HasValue) {
             var ray = debugRay.Value;
             Gizmos.DrawRay(ray.origin, ray.origin + 10000f * ray.direction);
+        }
+    }
+
+    public void DropIfDragging(LostAndFoundObject lostAndFoundObject) {
+        if (dragged == lostAndFoundObject) {
+            LetGoOfDragged();
         }
     }
 }
