@@ -41,7 +41,7 @@ public class Player : MonoBehaviour
     public Item equipedItemLegRight;
 
     [FoldoutGroup("Item Slots")]
-    public Transform leftHand, rightHand, head, torso, leftArm, rightArm, leftLeg, rightLeg;
+    public Transform leftHandSlot, rightHandSlot, headSlot, torsoSlot, leftArmSlot, rightArmSlot, leftLegSlot, rightLegSlot;
 
     #endregion
     private void Awake()
