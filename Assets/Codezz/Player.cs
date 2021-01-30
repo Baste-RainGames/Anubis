@@ -66,6 +66,24 @@ public class Player : MonoBehaviour
         currentHealth = MaxHealth;
         if (!FindObjectOfType<HPUI>())
             Instantiate(Resources.Load("HP Canvas"));
+
+        foreach (var kvp in TransferDataBetweenScenes.equipedToSlotWhenExitingLostNFound) {
+            var (id, item) = kvp;
+
+            var slot = id switch {
+                ItemSlotID.leftHandSlot  => leftHandSlot,
+                ItemSlotID.rightHandSlot => rightHandSlot,
+                ItemSlotID.headSlot      => headSlot,
+                ItemSlotID.torsoSlot     => torsoSlot,
+                ItemSlotID.leftArmSlot   => leftArmSlot,
+                ItemSlotID.rightArmSlot  => rightArmSlot,
+                ItemSlotID.leftLegSlot   => leftLegSlot,
+                ItemSlotID.rightLegSlot  => rightLegSlot,
+                _ => throw new ArgumentOutOfRangeException(nameof(id), id.ToString())
+            };
+
+            slot.item = item;
+        }
     }
 
     public void Update()
@@ -95,7 +113,7 @@ public class Player : MonoBehaviour
                 default:
                     throw new Exception("Item type has no case yet");
             }
-        
+
     }
 
     void ThrowRight()

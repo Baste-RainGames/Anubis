@@ -38,3 +38,14 @@ public class ItemSlot : MonoBehaviour
         }
     }
 }
+
+public enum ItemSlotID {
+    leftHandSlot,
+    rightHandSlot,
+    headSlot,
+    torsoSlot,
+    leftArmSlot,
+    rightArmSlot,
+    leftLegSlot,
+    rightLegSlot
+}

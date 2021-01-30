@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da852f409b301d443a663d6a80c742d8, type: 3}
+  m_Name: Briefcase
+  m_EditorClassIdentifier: 
+  itemPrefab: {fileID: 919132149155446097, guid: 51966afffa65e814282e3b898eed5a30, type: 3}
+  itemType: 2
+  itemStrength: 1
+  bounceStrength: 1
+  sprite: {fileID: 21300000, guid: 82e9326669ac442ef9c689616f617413, type: 3}
+  spawnProbability: 0
