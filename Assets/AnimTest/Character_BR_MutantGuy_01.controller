@@ -72,6 +72,32 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1102 &-7639368000587545737
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: zomb-idle
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: 5964919a4ed1c4c8b8f7a2f24e921b46, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1101 &-7192001105380361445
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -249,6 +275,32 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!1102 &-2843371995316367943
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: zomb-kick
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: ee7c3f4db1c1148d993b93f3526d6294, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1101 &-2103022038174725987
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -312,8 +364,7 @@ AnimatorState:
   m_Name: enemy-punch
   m_Speed: 1
   m_CycleOffset: 0
-  m_Transitions:
-  - {fileID: -8751100064932649199}
+  m_Transitions: []
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
@@ -526,7 +577,7 @@ AnimatorStateMachine:
     m_Position: {x: 400, y: 630, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2438020779878539814}
-    m_Position: {x: 570, y: 230, z: 0}
+    m_Position: {x: 435, y: 695, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2898647666381084641}
     m_Position: {x: 470, y: 760, z: 0}
@@ -548,6 +599,12 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: 3884223952292478688}
     m_Position: {x: 284.36734, y: 720.3623, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -2843371995316367943}
+    m_Position: {x: 319.36734, y: 785.3623, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -7639368000587545737}
+    m_Position: {x: 354.36734, y: 850.3623, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
