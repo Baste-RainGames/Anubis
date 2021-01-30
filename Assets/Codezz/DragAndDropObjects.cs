@@ -11,8 +11,52 @@ public class DragAndDropObjects : MonoBehaviour {
     public GraphicRaycaster rc;
     public float equipDistance;
 
+    public int numItemsToSpawn;
+    public LostAndFoundObject lostAndFoundPrefab;
+
     private SpringJoint joint;
     private Rigidbody dragged;
+
+    private void Start() {
+        var items = Resources.LoadAll<Item>("Itemz");
+
+        if (items.Length == 0) {
+            Debug.LogError("No itemzz");
+            return;
+        }
+
+        var itemBag = new (Item item, int weightSum)[items.Length];
+        var sum = 0;
+        for (int i = 0; i < itemBag.Length; i++) {
+            var item = items[i];
+            var weight = Mathf.Max(1, item.spawnProbability);
+            sum += weight;
+            itemBag[i] = (item, sum);
+        }
+
+        for (int i = 0; i < numItemsToSpawn; i++) {
+            var random = Random.Range(0, sum);
+            Item toSpawn = null;
+            for (int j = 0; j < itemBag.Length; j++) {
+                if (random < itemBag[j].weightSum) {
+                    toSpawn = itemBag[j].item;
+                    break;
+                }
+            }
+
+            if (toSpawn == null) {
+                Debug.LogError("Everything's wrong!");
+                return;
+            }
+
+            Spawn(toSpawn);
+        }
+    }
+
+    private void Spawn(Item toSpawn) {
+        var spawned = Instantiate(lostAndFoundPrefab);
+        spawned.SetItem(toSpawn);
+    }
 
     void Update() {
         var ray = mainCamera.ScreenPointToRay(Input.mousePosition);

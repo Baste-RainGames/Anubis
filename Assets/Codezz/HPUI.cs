@@ -1,11 +1,15 @@
 using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class HPUI : MonoBehaviour {
 
     public Image hpTemplate;
+    public Sprite hpFull;
+    public Sprite hpEmpty;
+
     private List<Image> hps = new List<Image>();
     private Player player;
 
@@ -33,10 +37,18 @@ public class HPUI : MonoBehaviour {
     }
 
     private void UpdateHealthUI() {
-        for (int i = 0; i < player.currentHealth; i++)
-            hps[i].color = Color.red;
+        for (int i = 0; i < player.currentHealth; i++) {
+            if (hps[i].sprite != hpFull) {
+                hps[i].sprite = hpFull;
+                hps[i].transform.DOPunchScale(1.5f * Vector3.one, .2f);
+            }
+        }
+
         for (int i = player.currentHealth; i < hps.Count; i++)
-            hps[i].color = Color.black;
+            if (hps[i].sprite != hpEmpty) {
+                hps[i].sprite = hpEmpty;
+                hps[i].transform.DOPunchScale(-.5f * Vector3.one, .2f);
+            }
     }
 
 }
