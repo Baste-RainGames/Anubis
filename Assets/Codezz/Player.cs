@@ -68,7 +68,23 @@ public class Player : MonoBehaviour
         UpdateEquippedItems();  
 
         if (rightAttackDown)
-            anim.Play("weapon_swing");
+            switch (rightHandSlot.item.itemType)
+            {
+                case ItemType.Thrown:
+                    anim.Play("throw");
+                    break;
+                case ItemType.Projectile:
+                    break;
+                case ItemType.Club:
+                case ItemType.Sharp:
+                    anim.Play("weapon_swing");
+                    break;
+                case ItemType.Squeeker:
+                    break;
+                default:
+                    throw new Exception("Item type has no case yet");
+            }
+        
     }
 
     private void UpdateEquippedItems()
