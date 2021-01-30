@@ -21,6 +21,17 @@ public class Player : MonoBehaviour
     bool rightAttackHeld;
     #endregion
 
+    #region ItemStuff
+    public Item heldItemLeft;
+    public Item heldItemRight;
+    public Item equipedItemHead;
+    public Item equipedItemTorso;
+    public Item equipedItemArmLeft;
+    public Item equipedItemArmRight;
+    public Item equipedItemLegLeft;
+    public Item equipedItemLegRight;
+
+    #endregion
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -33,6 +44,12 @@ public class Player : MonoBehaviour
     public void Update()
     {
         AssignInputs();
+        UpdateEquippedItems();
+    }
+
+    private void UpdateEquippedItems()
+    {
+
     }
 
     private void AssignInputs()
