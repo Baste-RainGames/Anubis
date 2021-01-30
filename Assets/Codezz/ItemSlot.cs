@@ -19,7 +19,7 @@ public class ItemSlot : MonoBehaviour
         foreach (var item in exampleMesh.GetComponentsInChildren<MeshFilter>())
         {
             
-            Gizmos.DrawMesh(item.sharedMesh, transform.position + item.transform.localPosition, transform.rotation * item.transform.localRotation, transform.localScale + item.transform.localScale);
+            Gizmos.DrawMesh(item.sharedMesh, transform.position + item.transform.localPosition, transform.rotation * item.transform.localRotation,  transform.localScale + item.transform.localScale);
 
         }
     }
