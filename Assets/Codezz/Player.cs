@@ -13,10 +13,6 @@ public class Player : MonoBehaviour
     public Transform playerModel;
     public Animator anim;
 
-    #region Pre Cinemachine Camera
-    public Transform horizontalPivot, verticalPivot;
-
-    #endregion
 
     private void Awake()
     {
@@ -24,22 +20,14 @@ public class Player : MonoBehaviour
     }
     private void Start()
     {
-        cam = Camera.main;
 
     }
 
     public void Update()
     {
         inputAxis = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-
-        MoveCameraTemp();
     }
 
-    private void MoveCameraTemp()
-    {
-        horizontalPivot.Rotate(Vector3.up, Input.GetAxis("Mouse X"));
-        verticalPivot.Rotate(Vector3.right, -Input.GetAxis("Mouse Y"));
-    }
 
     private void FixedUpdate()
     {
