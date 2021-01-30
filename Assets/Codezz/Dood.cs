@@ -83,7 +83,7 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
         var hits = hitbox.PollHit();
         foreach (var hit in hits) {
             if (hit.gameObject.TryGetComponent<Player>(out var p))
-                p.OnDamaged();
+                p.OnHit();
         }
     }
 
