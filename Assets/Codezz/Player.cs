@@ -124,5 +124,8 @@ public class Player : MonoBehaviour
     }
 
 
+    public void OnHit() {
+        currentHealth = Mathf.Max(0, currentHealth - 1);
+    }
 }
 
