@@ -22,7 +22,6 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
     private void Start() {
         player = FindObjectOfType<Player>();
         navMeshAgent = GetComponent<NavMeshAgent>();
-        animator.gameObject.AddComponent<AnimationEventListener>();
 
         behaviourTree = new BehaviourTree(
             Selector(
@@ -78,18 +77,11 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
             animator.Play(btCommand.playAnimation);
     }
 
-    private void ActivateHitbox() {
+    public void ActivateHitbox() {
         var hits = hitbox.PollHit();
         foreach (var hit in hits) {
             if (hit.gameObject.TryGetComponent<Player>(out var p))
                 p.OnHit();
-        }
-    }
-
-    private class AnimationEventListener : MonoBehaviour {
-        public Dood dood;
-        public void OnAttack() {
-            dood.ActivateHitbox();
         }
     }
 
