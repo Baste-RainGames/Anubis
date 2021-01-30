@@ -9,6 +9,9 @@ public class Player : MonoBehaviour
     public float maxSpeed = 5;
 
     Rigidbody rb;
+
+    Vector3 facingDirection = Vector3.forward;
+
     Camera cam;
     public Transform playerModel;
     public Animator anim;
@@ -48,6 +51,9 @@ public class Player : MonoBehaviour
 
     public int MaxHealth => 10;
     public int currentHealth;
+    public float throwStrength = 7;
+    
+    private bool freezePlayer;
 
     private void Awake()
     {
@@ -65,6 +71,8 @@ public class Player : MonoBehaviour
     public void Update()
     {
         AssignInputs();         
+        if (freezePlayer)
+            return;
         UpdateEquippedItems();  
 
         if (rightAttackDown)
@@ -72,6 +80,9 @@ public class Player : MonoBehaviour
             {
                 case ItemType.Thrown:
                     anim.Play("throw");
+                    freezePlayer = true;
+                    rb.velocity = Vector3.zero;
+                    Invoke("ThrowRight", .4f);
                     break;
                 case ItemType.Projectile:
                     break;
@@ -85,6 +96,25 @@ public class Player : MonoBehaviour
                     throw new Exception("Item type has no case yet");
             }
         
+    }
+
+    void ThrowRight()
+    {
+        Throw(rightHandSlot.transform.position, rightHandSlot.item.itemPrefab);
+    }
+    void ThrowLeft()
+    {
+        Throw(leftHandSlot.transform.position, leftHandSlot.item.itemPrefab);
+    }
+
+    void Throw(Vector3 positionToThrowFrom, GameObject prefab)
+    {
+        var o = Instantiate(prefab);
+        o.transform.position = positionToThrowFrom;
+        o.AddComponent<Rigidbody>().velocity = (facingDirection + transform.up * .3f).normalized * throwStrength;
+
+        freezePlayer = false;
+
     }
 
     private void UpdateEquippedItems()
@@ -105,6 +135,8 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (freezePlayer)
+            return;
         Move();
     }
 
@@ -115,8 +147,8 @@ public class Player : MonoBehaviour
         var direction = (forward * inputAxis.y + right * inputAxis.x).normalized;
         if (direction.magnitude > 0.01f)
         {
-            anim.SetFloat("MovementSpeed", direction.magnitude);
-            playerModel.forward = direction;
+            anim.SetFloat("MovementSpeed", facingDirection.magnitude);
+            playerModel.forward = facingDirection = direction;
         }
         else
         {
