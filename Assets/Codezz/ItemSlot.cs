@@ -9,17 +9,17 @@ public class ItemSlot : MonoBehaviour
     public bool showSlotGizmos;
 
     //Todo: Om vi legger til Offset per item, her skal Item referansen for preview
-    public Item exampleItem; 
+    public Item item; 
 
     [Button()]
     void SelectMe()
     {
         Selection.activeTransform = transform;
     }
-    GameObject exampleMesh => exampleItem.itemPrefab;
+    GameObject exampleMesh => item.itemPrefab;
     private void OnDrawGizmos()
     {
-        if (showSlotGizmos == false || exampleItem == null)
+        if (showSlotGizmos == false || item == null)
             return;
         Gizmos.color = new Color(1, 0, 0, .5f);
         foreach (var item in exampleMesh.GetComponentsInChildren<MeshFilter>())

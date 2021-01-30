@@ -44,6 +44,8 @@ public class Player : MonoBehaviour
     [InlineEditor]
     public ItemSlot leftHandSlot, rightHandSlot, headSlot, torsoSlot, leftArmSlot, rightArmSlot, leftLegSlot, rightLegSlot;
 
+    List<ItemSlot> itemSlots => new List<ItemSlot>() { leftArmSlot, rightArmSlot, headSlot, torsoSlot, leftArmSlot, rightArmSlot, leftLegSlot, rightLegSlot};
+
     [FoldoutGroup("Item Slots")]
     [Button]
     void ToggleAllGizmos(bool isShown = true)
@@ -78,6 +80,9 @@ public class Player : MonoBehaviour
     {
         AssignInputs();
         UpdateEquippedItems();
+
+        if (rightAttackDown)
+            anim.SetBool("ShouldHit", true);
     }
 
     private void UpdateEquippedItems()
