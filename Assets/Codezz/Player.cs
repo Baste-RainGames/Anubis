@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public class Player : MonoBehaviour
 {
@@ -22,14 +23,25 @@ public class Player : MonoBehaviour
     #endregion
 
     #region ItemStuff
+    [FoldoutGroup("Items")]
     public Item heldItemLeft;
+    [FoldoutGroup("Items")]
     public Item heldItemRight;
+    [FoldoutGroup("Items")]
     public Item equipedItemHead;
+    [FoldoutGroup("Items")]
     public Item equipedItemTorso;
+    [FoldoutGroup("Items")]
     public Item equipedItemArmLeft;
+    [FoldoutGroup("Items")]
     public Item equipedItemArmRight;
+    [FoldoutGroup("Items")]
     public Item equipedItemLegLeft;
+    [FoldoutGroup("Items")]
     public Item equipedItemLegRight;
+
+    [FoldoutGroup("Item Slots")]
+    public Transform leftHand, rightHand, head, torso, leftArm, rightArm, leftLeg, rightLeg;
 
     #endregion
     private void Awake()
