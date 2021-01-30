@@ -10,17 +10,19 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
 
     public BehaviourTree behaviourTree;
     public Animator animator;
+    public Hitbox hitbox;
 
     private NavMeshAgent navMeshAgent;
     private Player player;
 
     public float attackRange;
     public float visionRange;
-    public float attackDuration;
+    public float timeBeforeHitbox;
 
     private void Start() {
         player = FindObjectOfType<Player>();
         navMeshAgent = GetComponent<NavMeshAgent>();
+        animator.gameObject.AddComponent<AnimationEventListener>();
 
         behaviourTree = new BehaviourTree(
             Selector(
@@ -60,7 +62,7 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
         btData.doodPos = transform.position;
         btData.doodAttackRange = attackRange;
         btData.doodVisionRange = visionRange;
-        btData.attackDuration = attackDuration;
+        btData.attackDuration = timeBeforeHitbox;
     }
 
     private void ApplyAICommand(DoodAIOutput btCommand) {
@@ -72,8 +74,22 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
         if (btCommand.stopMoving)
             navMeshAgent.isStopped = true;
 
-        if (!string.IsNullOrEmpty(btCommand.playAnimation)) {
+        if (!string.IsNullOrEmpty(btCommand.playAnimation))
             animator.Play(btCommand.playAnimation);
+    }
+
+    private void ActivateHitbox() {
+        var hits = hitbox.PollHit();
+        foreach (var hit in hits) {
+            if (hit.gameObject.TryGetComponent<Player>(out var p))
+                p.OnHit();
+        }
+    }
+
+    private class AnimationEventListener : MonoBehaviour {
+        public Dood dood;
+        public void OnAttack() {
+            dood.ActivateHitbox();
         }
     }
 
@@ -100,6 +116,7 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
         public void Clear() {
             moveTo = null;
             stopMoving = false;
+            playAnimation = null;
         }
     }
 
@@ -172,7 +189,7 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
         protected override void OnStartedTicking() {
             command = new DoodAIOutput {
                 stopMoving = true,
-                playAnimation = "weapon_swing"
+                playAnimation = "enemy-punch",
             };
 
             startTime = Time.time;

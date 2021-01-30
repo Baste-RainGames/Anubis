@@ -49,7 +49,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1269871794871043873}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -108,9 +108,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a4c905f18377004abf618a2e34a7dae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetLimb: {fileID: 6522332418424555657}
   box: {fileID: 2299940282212837899}
-  offset: {x: 0, y: 0, z: 0}
+  debugHit: 1
+  debugRenderer: {fileID: 3965890818446867772}
 --- !u!1 &6526588136821489123
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,9 +158,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 6612053274786928365}
+  hitbox: {fileID: 4916742735964710398}
   attackRange: 4
   visionRange: 15
-  attackDuration: 0
+  timeBeforeHitbox: 0.3
 --- !u!195 &6526588136821489121
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -260,10 +261,5 @@ Transform:
 --- !u!95 &6612053274786928365 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 95035460417453950, guid: f9f6be802bd0fe3448c68a8b6f205bce, type: 3}
-  m_PrefabInstance: {fileID: 6526588136722360723}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &6522332418424555657 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4753822939914522, guid: f9f6be802bd0fe3448c68a8b6f205bce, type: 3}
   m_PrefabInstance: {fileID: 6526588136722360723}
   m_PrefabAsset: {fileID: 0}
