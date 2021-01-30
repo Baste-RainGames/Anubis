@@ -54,6 +54,9 @@ public class Player : MonoBehaviour
     private void Start()
     {
         cam = Camera.main;
+
+        if (!FindObjectOfType<HPUI>())
+            Instantiate(Resources.Load("HP Canvas"));
     }
 
     public void Update()
