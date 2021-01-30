@@ -9,11 +9,14 @@ using static BT<Dood.DoodAIInput, Dood.DoodAIOutput>;
 public class /*HTML Rulez */Dood : MonoBehaviour {
 
     public BehaviourTree behaviourTree;
+    public Animator animator;
+
     private NavMeshAgent navMeshAgent;
     private Player player;
 
     public float attackRange;
     public float visionRange;
+    public float attackDuration;
 
     private void Start() {
         player = FindObjectOfType<Player>();
@@ -57,6 +60,7 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
         btData.doodPos = transform.position;
         btData.doodAttackRange = attackRange;
         btData.doodVisionRange = visionRange;
+        btData.attackDuration = attackDuration;
     }
 
     private void ApplyAICommand(DoodAIOutput btCommand) {
@@ -67,6 +71,10 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
 
         if (btCommand.stopMoving)
             navMeshAgent.isStopped = true;
+
+        if (!string.IsNullOrEmpty(btCommand.playAnimation)) {
+            animator.Play(btCommand.playAnimation);
+        }
     }
 
 #region AI
@@ -78,13 +86,16 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
         public Vector3 playerPos;
         public Vector3 doodPos;
         public bool playerExists;
+
         public float doodAttackRange;
         public float doodVisionRange;
+        public float attackDuration;
     }
 
     public struct DoodAIOutput : BTCommand {
         public Vector3? moveTo;
         public bool stopMoving;
+        public string playAnimation;
 
         public void Clear() {
             moveTo = null;
@@ -156,12 +167,22 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
     }
 
     public class AttackPlayerNode : BTNode {
-        protected override BTState OnTick() {
+        private float startTime;
+
+        protected override void OnStartedTicking() {
             command = new DoodAIOutput {
-                stopMoving = true
+                stopMoving = true,
+                playAnimation = "weapon_swing"
             };
 
-            return BTState.Success;
+            startTime = Time.time;
+        }
+
+        protected override BTState OnTick() {
+            if (Time.time - startTime > data.attackDuration)
+                return BTState.Success;
+
+            return BTState.Continue;
         }
 
         public override void ShowAsString(Action<BTNode, string> AppendLine, Action IncreaseIndentation, Action DecreaseIndentation) {
