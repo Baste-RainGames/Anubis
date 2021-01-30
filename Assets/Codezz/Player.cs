@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using UnityEditor;
 
 public class Player : MonoBehaviour
 {
@@ -30,8 +31,27 @@ public class Player : MonoBehaviour
     [InlineEditor]
     public ItemSlot leftHandSlot, rightHandSlot, headSlot, torsoSlot, leftArmSlot, rightArmSlot, leftLegSlot, rightLegSlot;
 
-    List<ItemSlot> _itemSlots;
-    List<ItemSlot> ItemSlots => _itemSlots ??= new List<ItemSlot>() { leftArmSlot, rightArmSlot, headSlot, torsoSlot, leftArmSlot, rightArmSlot, leftLegSlot, rightLegSlot};
+    [SerializeField]
+    List<ItemSlot> _itemSlots = new List<ItemSlot>();
+    List<ItemSlot> ItemSlots
+    {
+        get
+        {
+            if (_itemSlots == null || _itemSlots.Count == 0)
+            {
+                _itemSlots.Add(leftHandSlot);
+                _itemSlots.Add(rightHandSlot);
+                _itemSlots.Add(headSlot);
+                _itemSlots.Add(torsoSlot);
+                _itemSlots.Add(leftArmSlot);
+                _itemSlots.Add(rightArmSlot);
+                _itemSlots.Add(leftLegSlot);
+                _itemSlots.Add(rightLegSlot);
+
+            }
+            return _itemSlots;
+        }
+    }
 
     [FoldoutGroup("Item Slots")]
     [Button]
@@ -46,8 +66,17 @@ public class Player : MonoBehaviour
         leftLegSlot.showSlotGizmos = isShown;
         rightLegSlot.showSlotGizmos = isShown;
     }
-    #endregion
 
+    [FoldoutGroup("Item Slots")]
+    [Button]
+    public void ChangeAllEquipment(Item item)
+    {
+        foreach (var slot in ItemSlots)
+        {
+            slot.item = item;
+        }
+    }
+    #endregion
 
     public int MaxHealth => 10;
     public int currentHealth;
@@ -61,12 +90,13 @@ public class Player : MonoBehaviour
     }
     private void Start()
     {
+        UpdateEquippedItems();  
         cam = Camera.main;
 
         currentHealth = MaxHealth;
         if (!FindObjectOfType<HPUI>())
             Instantiate(Resources.Load("HP Canvas"));
-
+        if(false)
         foreach (var kvp in TransferDataBetweenScenes.equipedToSlotWhenExitingLostNFound) {
             var (id, item) = kvp;
 
@@ -91,7 +121,6 @@ public class Player : MonoBehaviour
         AssignInputs();         
         if (freezePlayer)
             return;
-        UpdateEquippedItems();  
 
         if (rightAttackDown)
             switch (rightHandSlot.item.itemType)
@@ -135,9 +164,22 @@ public class Player : MonoBehaviour
 
     }
 
+    [ContextMenu("Test equip")]
     private void UpdateEquippedItems()
     {
-
+        for (int i = 0; i < ItemSlots.Count; i++)
+        {
+            var slot = ItemSlots[i];
+            if (slot.transform.childCount > 0)
+                Destroy(slot.transform.GetChild(0).gameObject);
+            if(slot.item != null)
+            {
+                var equipedItem = Instantiate(slot.item.itemPrefab);
+                equipedItem.transform.parent = slot.transform;
+                equipedItem.transform.localPosition = Vector3.zero;
+                equipedItem.transform.rotation = slot.transform.rotation;
+            }
+        }
     }
 
     private void AssignInputs()

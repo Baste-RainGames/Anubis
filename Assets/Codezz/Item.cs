@@ -12,5 +12,8 @@ public class Item : ScriptableObject
     public int bounceStrength = 1;
     public Sprite sprite;
     public int spawnProbability;
+
+    [FoldoutGroup("Transform offset adjust")]
+    public Vector3 offsetPosition, offsetScale, offsetRotation;
 }
 public enum ItemType { Thrown, Projectile, Club, Sharp, Squeeker}
