@@ -58,6 +58,9 @@ public class Player : MonoBehaviour
         rightLegSlot.showSlotGizmos = isShown;
     }
     #endregion
+    public int MaxHealth => 10;
+
+#endregion
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -65,6 +68,9 @@ public class Player : MonoBehaviour
     private void Start()
     {
         cam = Camera.main;
+
+        if (!FindObjectOfType<HPUI>())
+            Instantiate(Resources.Load("HP Canvas"));
     }
 
     public void Update()

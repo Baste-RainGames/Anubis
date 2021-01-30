@@ -59,8 +59,10 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
     }
 
     private void ApplyAICommand(DoodAIOutput btCommand) {
-        if (btCommand.moveTo.HasValue)
+        if (btCommand.moveTo.HasValue) {
+            navMeshAgent.isStopped = false;
             navMeshAgent.SetDestination(btCommand.moveTo.Value);
+        }
 
         if (btCommand.stopMoving)
             navMeshAgent.isStopped = true;
@@ -118,11 +120,20 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
 
         protected override BTState OnTick() {
             if (!hasMoved) {
+                hasMoved = true;
                 tree.command = new DoodAIOutput {
                     moveTo = data.playerPos
                 };
                 return BTState.Continue;
             }
+
+            if (Vector3.Distance(data.agent.destination, data.playerPos) > 1f) {
+                tree.command = new DoodAIOutput {
+                    moveTo = data.playerPos
+                };
+                return BTState.Continue;
+            }
+
             return MoveUntilDone(data);
         }
 
@@ -148,8 +159,6 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
             command = new DoodAIOutput {
                 stopMoving = true
             };
-
-            Debug.Log("Attack!");
 
             return BTState.Success;
         }
