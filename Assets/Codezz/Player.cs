@@ -41,7 +41,8 @@ public class Player : MonoBehaviour
     public Item equipedItemLegRight;
 
     [FoldoutGroup("Item Slots")]
-    public Transform leftHandSlot, rightHandSlot, headSlot, torsoSlot, leftArmSlot, rightArmSlot, leftLegSlot, rightLegSlot;
+    [InlineEditor]
+    public ItemSlot leftHandSlot, rightHandSlot, headSlot, torsoSlot, leftArmSlot, rightArmSlot, leftLegSlot, rightLegSlot;
 
     #endregion
     private void Awake()
@@ -100,11 +101,3 @@ public class Player : MonoBehaviour
 
 }
 
-public static class Vector3Extensions
-{
-    public static Vector3 RemoveY(this Vector3 v3)
-    {
-        v3.Scale(new Vector3(1, 0, 1));
-        return v3;
-    }
-}
