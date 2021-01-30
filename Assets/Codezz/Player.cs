@@ -41,9 +41,26 @@ public class Player : MonoBehaviour
     public Item equipedItemLegRight;
 
     [FoldoutGroup("Item Slots")]
-    public Transform leftHand, rightHand, head, torso, leftArm, rightArm, leftLeg, rightLeg;
+    [InlineEditor]
+    public ItemSlot leftHandSlot, rightHandSlot, headSlot, torsoSlot, leftArmSlot, rightArmSlot, leftLegSlot, rightLegSlot;
 
+    [FoldoutGroup("Item Slots")]
+    [Button]
+    void ToggleAllGizmos(bool isShown = true)
+    {
+        leftHandSlot.showSlotGizmos = isShown;
+        rightHandSlot.showSlotGizmos = isShown;
+        headSlot.showSlotGizmos = isShown;
+        torsoSlot.showSlotGizmos = isShown;
+        leftArmSlot.showSlotGizmos = isShown;
+        rightArmSlot.showSlotGizmos = isShown;
+        leftLegSlot.showSlotGizmos = isShown;
+        rightLegSlot.showSlotGizmos = isShown;
+    }
     #endregion
+    public int MaxHealth => 10;
+    public int currentHealth;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -51,6 +68,10 @@ public class Player : MonoBehaviour
     private void Start()
     {
         cam = Camera.main;
+
+        currentHealth = MaxHealth;
+        if (!FindObjectOfType<HPUI>())
+            Instantiate(Resources.Load("HP Canvas"));
     }
 
     public void Update()
@@ -100,11 +121,3 @@ public class Player : MonoBehaviour
 
 }
 
-public static class Vector3Extensions
-{
-    public static Vector3 RemoveY(this Vector3 v3)
-    {
-        v3.Scale(new Vector3(1, 0, 1));
-        return v3;
-    }
-}

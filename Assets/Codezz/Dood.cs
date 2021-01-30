@@ -1,13 +1,14 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 using static BT<Dood.DoodAIInput, Dood.DoodAIOutput>;
 
 [SelectionBase]
 public class /*HTML Rulez */Dood : MonoBehaviour {
 
-    private BehaviourTree bt;
+    public BehaviourTree behaviourTree;
     private NavMeshAgent navMeshAgent;
     private Player player;
 
@@ -18,11 +19,12 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
         player = FindObjectOfType<Player>();
         navMeshAgent = GetComponent<NavMeshAgent>();
 
-        bt = new BehaviourTree(
+        behaviourTree = new BehaviourTree(
             Selector(
                 Sequence(
                     PlayerInAttackRange(),
-                    Attack()
+                    Attack(),
+                    Wait(1f)
                 ),
                 Sequence(
                     CanSeePlayer(),
@@ -30,18 +32,18 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
                 ),
                 Sequence(
                     MoveRandom(),
-                    WaitRandom(3, 5)
+                    WaitRandom(2, 2.5f)
                 )
             )
         );
 
-        bt.data.agent = navMeshAgent;
+        behaviourTree.data.agent = navMeshAgent;
     }
 
     private void Update() {
-        UpdateAIData(ref bt.data);
-        bt.Tick();
-        ApplyAICommand(bt.command);
+        UpdateAIData(ref behaviourTree.data);
+        behaviourTree.Tick();
+        ApplyAICommand(behaviourTree.command);
     }
 
     private void UpdateAIData(ref DoodAIInput btData) {
@@ -58,8 +60,10 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
     }
 
     private void ApplyAICommand(DoodAIOutput btCommand) {
-        if (btCommand.moveTo.HasValue)
+        if (btCommand.moveTo.HasValue) {
+            navMeshAgent.isStopped = false;
             navMeshAgent.SetDestination(btCommand.moveTo.Value);
+        }
 
         if (btCommand.stopMoving)
             navMeshAgent.isStopped = true;
@@ -88,6 +92,20 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
         }
     }
 
+    private static BTState MoveUntilDone(DoodAIInput data) {
+        if (data.agent.pathPending)
+            return BTState.Continue;
+
+        if (data.agent.isPathStale) {
+            return BTState.Failure;
+        }
+
+        if (data.agent.remainingDistance <= data.agent.stoppingDistance || !data.agent.hasPath)
+            return BTState.Success;
+
+        return BTState.Continue;
+    }
+
     private BTNode PlayerInAttackRange() => new PlayerInAttackRangeNode();
     private BTNode Attack() => new AttackPlayerNode();
     private BTNode CanSeePlayer() => new CanSeePlayerNode();
@@ -95,23 +113,29 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
     private BTNode MoveRandom() => new MoveRandomNode();
 
     public class MoveToPlayerNode : BTNode {
+        private bool hasMoved;
+
         protected override void OnStartedTicking() {
-            tree.command = new DoodAIOutput {
-                moveTo = data.playerPos
-            };
+            hasMoved = false;
         }
 
         protected override BTState OnTick() {
-            if (data.agent.pathPending)
+            if (!hasMoved) {
+                hasMoved = true;
+                tree.command = new DoodAIOutput {
+                    moveTo = data.playerPos
+                };
                 return BTState.Continue;
+            }
 
-            if (data.agent.isPathStale || !data.agent.hasPath)
-                return BTState.Failure;
+            if (Vector3.Distance(data.agent.destination, data.playerPos) > 1f) {
+                tree.command = new DoodAIOutput {
+                    moveTo = data.playerPos
+                };
+                return BTState.Continue;
+            }
 
-            if (data.agent.remainingDistance <= data.agent.stoppingDistance)
-                return BTState.Success;
-
-            return BTState.Continue;
+            return MoveUntilDone(data);
         }
 
         public override void ShowAsString(Action<BTNode, string> AppendLine, Action IncreaseIndentation, Action DecreaseIndentation) {
@@ -133,7 +157,10 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
 
     public class AttackPlayerNode : BTNode {
         protected override BTState OnTick() {
-            Debug.Log("Attack, yo!");
+            command = new DoodAIOutput {
+                stopMoving = true
+            };
+
             return BTState.Success;
         }
 
@@ -158,8 +185,43 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
     }
 
     public class MoveRandomNode : BTNode {
+        private Vector3 moveTo;
+        private bool hasMoved;
+
+        protected override void OnStartedTicking() {
+            base.OnStartedTicking();
+
+            hasMoved = false;
+            moveTo = FindRandomTargetPos();
+        }
+
+        private Vector3 FindRandomTargetPos() {
+            Vector3 targetPos = default;
+            for (int i = 0; i < 10; i++) {
+                var randomDir = Random.insideUnitCircle.normalized;
+                var random3D = new Vector3(randomDir.x, 0, randomDir.y);
+
+                targetPos = data.doodPos + 3f * random3D;
+
+                if (NavMesh.Raycast(data.doodPos, targetPos, out var hit, -1))
+                    targetPos = hit.position;
+
+                if (Vector3.Distance(targetPos, data.doodPos) > 2f)
+                    break;
+            }
+
+            return targetPos;
+        }
+
         protected override BTState OnTick() {
-            return BTState.Continue;
+            if (!hasMoved) {
+                hasMoved = true;
+                command = new DoodAIOutput {
+                    moveTo = moveTo
+                };
+                return BTState.Continue;
+            }
+            return MoveUntilDone(data);
         }
 
         public override void ShowAsString(Action<BTNode, string> AppendLine, Action IncreaseIndentation, Action DecreaseIndentation) {
@@ -169,5 +231,18 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
 
 #endregion
 
-}
+    private void OnDrawGizmosSelected() {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, visionRange);
 
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
+
+        Gizmos.color = Color.yellow;
+        if (navMeshAgent && navMeshAgent.hasPath) {
+            var corners = navMeshAgent.path.corners;
+            for (int i = 0; i < corners.Length - 1; i++)
+                Gizmos.DrawLine(corners[i], corners[i + 1]);
+        }
+    }
+}
