@@ -82,7 +82,7 @@ public class Player : MonoBehaviour
         UpdateEquippedItems();
 
         if (rightAttackDown)
-            anim.SetBool("ShouldHit", true);
+            anim.Play("weapon_swing");
     }
 
     private void UpdateEquippedItems()

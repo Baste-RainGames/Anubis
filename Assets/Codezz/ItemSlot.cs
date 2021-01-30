@@ -29,4 +29,9 @@ public class ItemSlot : MonoBehaviour
 
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        print("Gotcha");
+    }
 }
