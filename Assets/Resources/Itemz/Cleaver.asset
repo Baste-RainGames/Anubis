@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: da852f409b301d443a663d6a80c742d8, type: 3}
-  m_Name: Ducky
+  m_Name: Cleaver
   m_EditorClassIdentifier: 
-  itemPrefab: {fileID: 919132149155446097, guid: 013813ae883a1b74990dc830b9c90cc0, type: 3}
-  itemType: 0
+  itemPrefab: {fileID: 3325363234801763684, guid: 457e57284359d0b4b9037e1d7b33367c, type: 3}
+  itemType: 2
   itemStrength: 1
   bounceStrength: 1
-  sprite: {fileID: 21300000, guid: 6a3102e5d7fc3467f91b084518c94fef, type: 3}
+  sprite: {fileID: 21300000, guid: 87ed36dbbfd144111999f4dd22a8d37f, type: 3}
   spawnProbability: 0
