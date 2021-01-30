@@ -74,42 +74,17 @@ public class DragAndDropObjects : MonoBehaviour {
 
     private void StartDragging(Rigidbody2D rb, Vector2 mouseWorldPos) {
         dragged = rb;
+        dragged.gameObject.layer = LayerMask.NameToLayer("Dragged");
         dragged.isKinematic = false;
-        joint = rb.gameObject.AddComponent<TargetJoint2D>();
+        joint = dragged.gameObject.AddComponent<TargetJoint2D>();
         joint.autoConfigureTarget = false;
         joint.target = mouseWorldPos;
     }
 
     private void LetGoOfDragged() {
+        dragged.gameObject.layer = LayerMask.NameToLayer("Default");
         Destroy(joint);
-
-        // PointerEventData dummyEventData = new PointerEventData(FindObjectOfType<EventSystem>());
-        // dummyEventData.position = Input.mousePosition;
-        //
-        // var list = new List<RaycastResult>();
-        // rc.Raycast(dummyEventData, list);
-        //
-        // if (list.Count > 0) {
-        //     var attachTo = list[0].gameObject.GetComponent<RectTransform>();
-        //
-        //     var worldToScreenPoint = uiCamera.WorldToScreenPoint(attachTo.position);
-        //     // debugRay = uiCamera.ScreenPointToRay(worldToScreenPoint);
-        //
-        //     var ray = mainCamera.ScreenPointToRay(worldToScreenPoint);
-        //     var plane = new Plane(Vector3.back, dragger.transform.position);
-        //
-        //     if (plane.Raycast(ray, out var distance)) {
-        //         var worldPos = ray.origin + distance * ray.direction;
-        //
-        //         var distanceToTarget = Vector3.Distance(dragged.position, worldPos);
-        //         if (distanceToTarget < equipDistance) {
-        //             dragged.velocity = Vector3.zero;
-        //             dragged.isKinematic = true;
-        //             dragged.MovePosition(worldPos);
-        //         }
-        //     }
-        //
-        // }
+        dragged = null;
     }
 
     private Vector3? debugPos;
