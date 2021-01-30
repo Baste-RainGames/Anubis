@@ -33,5 +33,10 @@ public class ItemSlot : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         print("Gotcha");
+        var dood = other.GetComponent<Dood>();
+        if (dood)
+        {
+            dood.OnHit(item.itemStrength);
+        }
     }
 }

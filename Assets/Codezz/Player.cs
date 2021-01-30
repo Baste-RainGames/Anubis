@@ -23,28 +23,12 @@ public class Player : MonoBehaviour
     #endregion
 
     #region ItemStuff
-    [FoldoutGroup("Items")]
-    public Item heldItemLeft;
-    [FoldoutGroup("Items")]
-    public Item heldItemRight;
-    [FoldoutGroup("Items")]
-    public Item equipedItemHead;
-    [FoldoutGroup("Items")]
-    public Item equipedItemTorso;
-    [FoldoutGroup("Items")]
-    public Item equipedItemArmLeft;
-    [FoldoutGroup("Items")]
-    public Item equipedItemArmRight;
-    [FoldoutGroup("Items")]
-    public Item equipedItemLegLeft;
-    [FoldoutGroup("Items")]
-    public Item equipedItemLegRight;
-
     [FoldoutGroup("Item Slots")]
     [InlineEditor]
     public ItemSlot leftHandSlot, rightHandSlot, headSlot, torsoSlot, leftArmSlot, rightArmSlot, leftLegSlot, rightLegSlot;
 
-    List<ItemSlot> itemSlots => new List<ItemSlot>() { leftArmSlot, rightArmSlot, headSlot, torsoSlot, leftArmSlot, rightArmSlot, leftLegSlot, rightLegSlot};
+    List<ItemSlot> _itemSlots;
+    List<ItemSlot> ItemSlots => _itemSlots ??= new List<ItemSlot>() { leftArmSlot, rightArmSlot, headSlot, torsoSlot, leftArmSlot, rightArmSlot, leftLegSlot, rightLegSlot};
 
     [FoldoutGroup("Item Slots")]
     [Button]
@@ -60,6 +44,8 @@ public class Player : MonoBehaviour
         rightLegSlot.showSlotGizmos = isShown;
     }
     #endregion
+
+
     public int MaxHealth => 10;
     public int currentHealth;
 
@@ -78,8 +64,8 @@ public class Player : MonoBehaviour
 
     public void Update()
     {
-        AssignInputs();
-        UpdateEquippedItems();
+        AssignInputs();         
+        UpdateEquippedItems();  
 
         if (rightAttackDown)
             anim.Play("weapon_swing");
@@ -122,7 +108,6 @@ public class Player : MonoBehaviour
         }
         rb.velocity = direction * maxSpeed + Vector3.up * rb.velocity.y;
     }
-
 
     public void OnHit() {
         currentHealth = Mathf.Max(0, currentHealth - 1);

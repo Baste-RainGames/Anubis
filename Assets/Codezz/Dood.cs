@@ -18,6 +18,8 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
     public float attackRange;
     public float visionRange;
     public float timeBeforeHitbox;
+    public int maxHealth = 5;
+    public int currentHealth = 5;
 
     private void Start() {
         player = FindObjectOfType<Player>();
@@ -85,7 +87,20 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
         }
     }
 
-#region AI
+    public void OnHit(int damage)
+    {
+        currentHealth -= damage;
+        if (currentHealth <= 0)
+            OnDeath();
+    }
+
+    private void OnDeath()
+    {
+        //todo: should die prettier
+        Destroy(gameObject);
+    }
+
+    #region AI
 
 
     public struct DoodAIInput {
