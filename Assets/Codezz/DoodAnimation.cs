@@ -13,9 +13,11 @@ public class DoodAnimation : MonoBehaviour {
 
     private Dictionary<string, float> _clipDurations;
     public bool IsTurning;
+    public bool HasAggro;
 
     public Dictionary<string, float> ClipDurations
         => _clipDurations ??= anim.layers[0].states.ToDictionary(state => state.Name, state => state.Duration);
+
 
 
     public float Play(string animation) {
@@ -45,6 +47,9 @@ public class DoodAnimation : MonoBehaviour {
         if (IsTurning)
             return "zomb-turn";
 
-        return agent.velocity.magnitude > .01f ? "zomb-walk" : "zomb-idle";
+        if (agent.velocity.magnitude > .01f)
+            return HasAggro ? "zomb-chase" : "zomb-walk";
+        else
+            return "zomb-idle";
     }
 }

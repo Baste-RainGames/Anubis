@@ -90,8 +90,10 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
             anim.Play(btCommand.playAnimation);
         }
 
-        if (btCommand.markAggroAs.HasValue)
+        if (btCommand.markAggroAs.HasValue) {
             behaviourTree.data.hasAggro = btCommand.markAggroAs.Value;
+            anim.HasAggro = btCommand.markAggroAs.Value;
+        }
 
         if (btCommand.turnTowards.HasValue) {
             transform.LookAt2D(btCommand.turnTowards.Value, Time.deltaTime * 180f);
@@ -375,7 +377,8 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
         protected override void OnStartedTicking() {
             command = new DoodAIOutput {
                 markAggroAs = true,
-                playAnimation = "zomb-aggro"
+                playAnimation = "zomb-aggro",
+                stopMoving = true
             };
 
             endTime = Time.time + data.durationOfAnim["zomb-aggro"];
