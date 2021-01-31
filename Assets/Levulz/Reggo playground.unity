@@ -866,6 +866,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 95042069359887848, guid: c7cebe2178705794aa9a9911f182d8c1, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2fe361efbc4c10a468b8f0722d9ee5d6, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7cebe2178705794aa9a9911f182d8c1, type: 3}
 --- !u!95 &799285908 stripped
@@ -925,7 +929,6 @@ MonoBehaviour:
   rightArmSlot: {fileID: 0}
   leftLegSlot: {fileID: 0}
   rightLegSlot: {fileID: 0}
-  _itemSlots: []
   currentHealth: 0
   throwStrength: 7
 --- !u!54 &1178156827
