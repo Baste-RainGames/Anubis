@@ -105,7 +105,7 @@ public class Player : MonoBehaviour
         if (attackFreeze)
             return;
 
-        if (rightAttackDown)
+        if (rightAttackDown && rightHandSlot.transform.childCount > 0)
             switch (rightHandSlot.item.itemType)
             {
                 case ItemType.Thrown:
@@ -129,7 +129,7 @@ public class Player : MonoBehaviour
                 default:
                     throw new Exception("Item type has no case yet");
             }
-        if (leftAttackDown)
+        if (leftAttackDown && leftHandSlot.transform.childCount>0)
             switch (leftHandSlot.item.itemType)
             {
                 case ItemType.Thrown:
