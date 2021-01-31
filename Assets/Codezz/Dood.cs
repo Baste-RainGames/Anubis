@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
-
 using static BT<Dood.DoodAIInput, Dood.DoodAIOutput>;
 
 [SelectionBase]
 public class /*HTML Rulez */Dood : MonoBehaviour {
-
     public BehaviourTree behaviourTree;
     public DoodAnimation anim;
     public Hitbox hitbox;
@@ -21,6 +19,7 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
     public float timeBeforeHitbox;
     public int maxHealth = 5;
     public int currentHealth = 5;
+    private bool dead;
 
     private void Start() {
         player = FindObjectOfType<Player>();
@@ -57,6 +56,8 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
     }
 
     private void Update() {
+        if (dead)
+            return;
         UpdateAIData(ref behaviourTree.data);
         behaviourTree.Tick();
         ApplyAICommand(behaviourTree.command);
@@ -102,7 +103,6 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
         else {
             anim.IsTurning = false;
         }
-
     }
 
     public void ActivateHitbox() {
@@ -113,22 +113,20 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
         }
     }
 
-    public void OnHit(int damage)
-    {
+    public void OnHit(int damage) {
         currentHealth -= damage;
-        Debug.Log(currentHealth);
         if (currentHealth <= 0)
             OnDeath();
     }
 
-    private void OnDeath()
-    {
+    private void OnDeath() {
+        Debug.Log("Die");
         var dur = anim.Play("zomb-die");
+        dead = true;
         Destroy(gameObject, dur);
     }
 
-    #region AI
-
+#region AI
 
     public struct DoodAIInput {
         public NavMeshAgent agent;
@@ -304,6 +302,7 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
                 };
                 return BTState.Continue;
             }
+
             return MoveUntilDone(data);
         }
 
@@ -314,6 +313,7 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
 
 
     private BTNode DoesNotHaveAggro() => new CheckAggroNode();
+
     private class CheckAggroNode : BTNode {
         protected override BTState OnTick() {
             if (!data.hasAggro)
@@ -327,6 +327,7 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
     }
 
     private BTNode TurnToFacePlayer() => new TurnToFacePlayerNode();
+
     private class TurnToFacePlayerNode : BTNode {
         protected override BTState OnTick() {
             if (Vector3.Distance(data.playerPos, data.doodPos) > data.doodVisionRange)
@@ -357,6 +358,7 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
     }
 
     private BTNode NoteLostAggro() => new NoteLostAggroNode();
+
     private class NoteLostAggroNode : BTNode {
         protected override BTState OnTick() {
             command = new DoodAIOutput {
@@ -371,6 +373,7 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
     }
 
     private BTNode Aggro() => new AggroNode();
+
     private class AggroNode : BTNode {
         private float endTime;
 

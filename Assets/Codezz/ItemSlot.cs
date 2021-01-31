@@ -24,9 +24,9 @@ public class ItemSlot : MonoBehaviour
         foreach (var mf in exampleMesh.GetComponentsInChildren<MeshFilter>())
         {
 
-            Gizmos.DrawMesh(mf.sharedMesh, 
-                transform.position + mf.transform.localPosition + offsetPos(), 
-                transform.rotation * mf.transform.localRotation * Quaternion.Euler(item.offsetRotation), 
+            Gizmos.DrawMesh(mf.sharedMesh,
+                transform.position + mf.transform.localPosition + offsetPos(),
+                transform.rotation * mf.transform.localRotation * Quaternion.Euler(item.offsetRotation),
                 transform.localScale.MultipliedWith(mf.transform.localScale).MultipliedWith(item.offsetScale));
 
         }
@@ -37,9 +37,7 @@ public class ItemSlot : MonoBehaviour
         return transform.up * item.offsetPosition.y + transform.right * item.offsetPosition.x + transform.forward * item.offsetPosition.z;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        print("Gotcha");
+    private void OnTriggerEnter(Collider other) {
         var dood = other.GetComponent<Dood>();
         if (dood)
         {
