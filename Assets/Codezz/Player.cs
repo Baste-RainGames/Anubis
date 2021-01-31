@@ -188,25 +188,36 @@ public class Player : MonoBehaviour
                 equipedItem.layer = slot.gameObject.layer;
                 equipedItem.transform.localPosition = Vector3.zero + slot.item.offsetPosition;
                 equipedItem.transform.rotation = slot.transform.rotation * Quaternion.Euler(slot.item.offsetRotation);
-                if (slot.item.name == "Ducky" )
-                    if (slot == headSlot || slot == torsoSlot)
-                    {
-                        equipedItem.transform.localScale = Vector3.one * 4;
-                        if (slot == torsoSlot)
-                        {
-                            equipedItem.transform.position += Vector3.down * .1f;
-                            equipedItem.transform.forward = facingDirection;
-                        }
-                        else
-                        {
-                            equipedItem.transform.position += facingDirection * .1f;
-                            equipedItem.transform.forward = facingDirection + Vector3.up;
-
-                        }
-
-                    }
+                ReplaceOnSpecialOcasions(slot, equipedItem);
             }
         }
+    }
+
+    private void ReplaceOnSpecialOcasions(ItemSlot slot, GameObject equipedItem)
+    {
+        if (slot.item.name == "Ducky")
+        {
+
+            if (slot == headSlot || slot == torsoSlot)
+            {
+                equipedItem.transform.localScale = Vector3.one * 4;
+                if (slot == torsoSlot)
+                {
+                equipedItem.transform.localScale = new Vector3(8, 6, 6);
+                    equipedItem.transform.position += Vector3.down * .37f + -facingDirection * .1f;
+                    equipedItem.transform.forward = facingDirection + Vector3.down * .3f;
+                }
+                else
+                {
+                    equipedItem.transform.position += facingDirection * .1f;
+                    equipedItem.transform.forward = facingDirection + Vector3.up;
+                }
+
+            }
+        }
+        if(slot.item.name == "Cleaver")
+                equipedItem.transform.localScale = new Vector3(1, 1.5f,1);
+
     }
 
     private void AssignInputs()
