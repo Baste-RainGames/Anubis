@@ -12,9 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da852f409b301d443a663d6a80c742d8, type: 3}
   m_Name: Briefcase
   m_EditorClassIdentifier: 
-  itemPrefab: {fileID: 919132149155446097, guid: 24a817f484e5c2149ae60a3bde3d0392, type: 3}
+  itemPrefab: {fileID: 8698575882733421241, guid: 9c45f2f116e3b514184b76d300f15a19, type: 3}
   itemType: 2
   itemStrength: 1
   bounceStrength: 1
   sprite: {fileID: 21300000, guid: 82e9326669ac442ef9c689616f617413, type: 3}
   spawnProbability: 0
+  offsetPosition: {x: 0, y: 0, z: 0}
+  offsetScale: {x: 1, y: 1, z: 1}
+  offsetRotation: {x: 0, y: 0, z: 0}

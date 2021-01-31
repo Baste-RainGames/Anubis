@@ -21,12 +21,20 @@ public class ItemSlot : MonoBehaviour
         if (showSlotGizmos == false || item == null)
             return;
         Gizmos.color = new Color(1, 0, 0, .5f);
-        foreach (var item in exampleMesh.GetComponentsInChildren<MeshFilter>())
+        foreach (var mf in exampleMesh.GetComponentsInChildren<MeshFilter>())
         {
 
-            Gizmos.DrawMesh(item.sharedMesh, transform.position + item.transform.localPosition, transform.rotation * item.transform.localRotation, transform.localScale.MultipliedWith(item.transform.localScale));
+            Gizmos.DrawMesh(mf.sharedMesh, 
+                transform.position + mf.transform.localPosition + offsetPos(), 
+                transform.rotation * mf.transform.localRotation * Quaternion.Euler(item.offsetRotation), 
+                transform.localScale.MultipliedWith(mf.transform.localScale).MultipliedWith(item.offsetScale));
 
         }
+    }
+
+    Vector3 offsetPos()
+    {
+        return transform.up * item.offsetPosition.y + transform.right * item.offsetPosition.x + transform.forward * item.offsetPosition.z;
     }
 
     private void OnTriggerEnter(Collider other)

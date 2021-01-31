@@ -19,5 +19,5 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 87ed36dbbfd144111999f4dd22a8d37f, type: 3}
   spawnProbability: 0
   offsetPosition: {x: 0, y: 0, z: 0}
-  offsetScale: {x: 0, y: 0, z: 0}
+  offsetScale: {x: 1, y: 1, z: 1}
   offsetRotation: {x: 0, y: 0, z: 0}

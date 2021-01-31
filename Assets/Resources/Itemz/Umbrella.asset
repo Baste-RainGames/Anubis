@@ -13,8 +13,11 @@ MonoBehaviour:
   m_Name: Umbrella
   m_EditorClassIdentifier: 
   itemPrefab: {fileID: 8385590681484416876, guid: 38bf67386d97b264fb1b7f07f15880fe, type: 3}
-  itemType: 2
+  itemType: 0
   itemStrength: 1
   bounceStrength: 1
   sprite: {fileID: 21300000, guid: f560c3dc2aa8b499b8b1583c51bc9c99, type: 3}
   spawnProbability: 0
+  offsetPosition: {x: 0, y: 0, z: 0}
+  offsetScale: {x: 1, y: 1, z: 1}
+  offsetRotation: {x: 0, y: 0, z: 0}

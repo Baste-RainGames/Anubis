@@ -14,6 +14,6 @@ public class Item : ScriptableObject
     public int spawnProbability;
 
     [FoldoutGroup("Transform offset adjust")]
-    public Vector3 offsetPosition, offsetScale, offsetRotation;
+    public Vector3 offsetPosition, offsetScale = new Vector3(1,1,1), offsetRotation;
 }
 public enum ItemType { Thrown, Projectile, Club, Sharp, Squeeker}

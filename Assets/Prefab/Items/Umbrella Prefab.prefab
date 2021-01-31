@@ -1,17 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &103479934
-MonoBehaviour:
+--- !u!65 &5650059528384418374
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8385590681484416876}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b202dcd97db56b64186a09b84aab968c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  serializedVersion: 2
+  m_Size: {x: 0.1408956, y: 1.1231811, z: 0.14192152}
+  m_Center: {x: 0.013972282, y: 0.67176414, z: 0.0019068718}
 --- !u!1001 &8691652174389275197
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25,15 +26,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 51966afffa65e814282e3b898eed5a30, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.9673114
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 51966afffa65e814282e3b898eed5a30, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 51966afffa65e814282e3b898eed5a30, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 3.6441705
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 51966afffa65e814282e3b898eed5a30, type: 3}
       propertyPath: m_LocalRotation.w
@@ -73,7 +74,7 @@ PrefabInstance:
       objectReference: {fileID: 2696451496099798558, guid: 977409aac38d9544193de1bf61388d71, type: 3}
     - target: {fileID: 919132149155446097, guid: 51966afffa65e814282e3b898eed5a30, type: 3}
       propertyPath: m_Name
-      value: Umbrella
+      value: Umbrella Prefab
       objectReference: {fileID: 0}
     - target: {fileID: 999637193369429273, guid: 51966afffa65e814282e3b898eed5a30, type: 3}
       propertyPath: m_Materials.Array.data[0]

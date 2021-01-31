@@ -123,10 +123,10 @@ public class Player : MonoBehaviour
                     throw new Exception("Item type has no case yet");
             }
         if (leftAttackDown)
-            switch (rightHandSlot.item.itemType)
+            switch (leftHandSlot.item.itemType)
             {
                 case ItemType.Thrown:
-                    //anim.Play("throw");
+                    anim.Play("player-throw-L");
                     freezePlayer = true;
                     rb.velocity = Vector3.zero;
                     Invoke("ThrowLeft", .4f);
@@ -178,8 +178,9 @@ public class Player : MonoBehaviour
             {
                 var equipedItem = Instantiate(slot.item.itemPrefab);
                 equipedItem.transform.parent = slot.transform;
-                equipedItem.transform.localPosition = Vector3.zero;
-                equipedItem.transform.rotation = slot.transform.rotation;
+                equipedItem.layer = slot.gameObject.layer;
+                equipedItem.transform.localPosition = Vector3.zero + slot.item.offsetPosition;
+                equipedItem.transform.rotation = slot.transform.rotation * Quaternion.Euler(slot.item.offsetRotation);
             }
         }
     }
