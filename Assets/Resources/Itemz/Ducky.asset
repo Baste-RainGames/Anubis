@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Ducky
   m_EditorClassIdentifier: 
   itemPrefab: {fileID: 3680891983696615355, guid: 57453291d74605c44a93440944f026ef, type: 3}
+  itemPrefab2D: {fileID: 5908950743948213572, guid: 9ea7b9024ca1b88418835ab55acf6109, type: 3}
   itemType: 0
   itemStrength: 1
   bounceStrength: 1
-  sprite: {fileID: 21300000, guid: 6a3102e5d7fc3467f91b084518c94fef, type: 3}
   spawnProbability: 0
   offsetPosition: {x: 0, y: 0, z: 0}
   offsetScale: {x: 1, y: 1, z: 1}

@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: PewPew
   m_EditorClassIdentifier: 
   itemPrefab: {fileID: 7169108730707245516, guid: b8fd6097c59149543ad199489bb6b448, type: 3}
+  itemPrefab2D: {fileID: 8218112235040943127, guid: e07911fdc4ed7e04f93acf12a28091ee, type: 3}
   itemType: 1
   itemStrength: 1
   bounceStrength: 1
-  sprite: {fileID: 21300000, guid: b86281008b73c45a6bc332fb05de199e, type: 3}
   spawnProbability: 0
   offsetPosition: {x: 0, y: 0, z: 0}
   offsetScale: {x: 1, y: 1, z: 1}
