@@ -9,7 +9,6 @@ public class Hitbox : MonoBehaviour {
     public MeshRenderer debugRenderer;
 
     private static Collider[] colliderBuffer = new Collider[10];
-    private static RaycastHit[] raycastHitBuffer = new RaycastHit[10];
 
     private List<Collider> results = new List<Collider>();
     private Coroutine debugRoutine;

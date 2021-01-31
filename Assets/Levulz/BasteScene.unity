@@ -1020,7 +1020,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1637533718}
-  m_LocalRotation: {x: 0.047732353, y: 0.8383722, z: -0.07439804, w: 0.5378835}
+  m_LocalRotation: {x: 0.047732353, y: 0.8383721, z: -0.074398026, w: 0.5378836}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1478,46 +1478,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 70947214885770273, guid: 56c06a5d63b455f419455a86595df16e, type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6118597059264045771, guid: 56c06a5d63b455f419455a86595df16e, type: 3}
-      propertyPath: layers.Array.data[0].serializedSingleClipStates.Array.data[8].animationEvents.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6118597059264045771, guid: 56c06a5d63b455f419455a86595df16e, type: 3}
-      propertyPath: layers.Array.data[0].serializedSingleClipStates.Array.data[8].animationEvents.Array.data[0].name
-      value: Attack1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6118597059264045771, guid: 56c06a5d63b455f419455a86595df16e, type: 3}
-      propertyPath: layers.Array.data[0].serializedSingleClipStates.Array.data[8].animationEvents.Array.data[0].time
-      value: 0.30000001192092896
-      objectReference: {fileID: 0}
-    - target: {fileID: 6118597059264045771, guid: 56c06a5d63b455f419455a86595df16e, type: 3}
-      propertyPath: layers.Array.data[0].serializedSingleClipStates.Array.data[8].animationEvents.Array.data[1].name
-      value: Attack2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6118597059264045771, guid: 56c06a5d63b455f419455a86595df16e, type: 3}
-      propertyPath: layers.Array.data[0].serializedSingleClipStates.Array.data[8].animationEvents.Array.data[1].time
-      value: 0.949999988079071
-      objectReference: {fileID: 0}
-    - target: {fileID: 6118597059264045771, guid: 56c06a5d63b455f419455a86595df16e, type: 3}
-      propertyPath: layers.Array.data[0].serializedSingleClipStates.Array.data[8].animationEvents.Array.data[0].minWeight
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6118597059264045771, guid: 56c06a5d63b455f419455a86595df16e, type: 3}
-      propertyPath: layers.Array.data[0].serializedSingleClipStates.Array.data[8].animationEvents.Array.data[1].minWeight
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6118597059264045771, guid: 56c06a5d63b455f419455a86595df16e, type: 3}
-      propertyPath: layers.Array.data[0].serializedSingleClipStates.Array.data[8].animationEvents.Array.data[0].mustBeActiveState
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6118597059264045771, guid: 56c06a5d63b455f419455a86595df16e, type: 3}
-      propertyPath: layers.Array.data[0].serializedSingleClipStates.Array.data[8].animationEvents.Array.data[1].mustBeActiveState
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6526588136821489122, guid: 56c06a5d63b455f419455a86595df16e, type: 3}
       propertyPath: m_RootOrder
       value: 2

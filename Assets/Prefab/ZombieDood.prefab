@@ -357,7 +357,15 @@ MonoBehaviour:
       hasUpdatedName: 1
       guid:
         guidSerialized: 545f474a-ad9e-4cea-b5ab-73f7cbf24f96
-      animationEvents: []
+      animationEvents:
+      - name: Attack1
+        time: 0.30000001192092896
+        mustBeActiveState: 1
+        minWeight: 0
+      - name: Attack2
+        time: 0.949999988079071
+        mustBeActiveState: 1
+        minWeight: 0
       speed: 1
       clip: {fileID: 7400000, guid: 1f074a365bd08498f85822b02f89c4a0, type: 2}
     serializedBlendTree1Ds: []
