@@ -368,8 +368,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 398411756}
-  m_LocalRotation: {x: 0.082060404, y: 0.3175275, z: -0.027593717, w: 0.9442887}
-  m_LocalPosition: {x: -1.9515, y: 3.5180001, z: -3.3002784}
+  m_LocalRotation: {x: 0.0820604, y: 0.3175275, z: -0.027593711, w: 0.9442887}
+  m_LocalPosition: {x: -1.9514998, y: 3.5180001, z: -3.3002784}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -633,7 +633,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 662489745}
-  m_LocalRotation: {x: 0.082060404, y: 0.3175275, z: -0.02759372, w: 0.9442887}
+  m_LocalRotation: {x: 0.082060404, y: 0.3175275, z: -0.027593719, w: 0.9442887}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1066,7 +1066,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 924069905}
-  m_LocalRotation: {x: 0.06491613, y: 0.31797585, z: -0.021828765, w: 0.9456219}
+  m_LocalRotation: {x: 0.06491612, y: 0.31797582, z: -0.021828765, w: 0.9456219}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1519,7 +1519,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1591668233}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.9515, y: 3.5180001, z: -3.3002784}
+  m_LocalPosition: {x: -1.9514998, y: 3.5180001, z: -3.3002784}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1637533720}
@@ -1698,8 +1698,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1637533718}
-  m_LocalRotation: {x: 0.09922295, y: 0.31697306, z: -0.033364818, w: 0.94263977}
-  m_LocalPosition: {x: 0.00000023841858, y: 0, z: 0}
+  m_LocalRotation: {x: 0.09922295, y: 0.31697303, z: -0.03336481, w: 0.94263977}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1724587086}
@@ -2723,7 +2723,7 @@ PrefabInstance:
     - target: {fileID: 6691563297113036281, guid: d2eb2010343c19e40b0f62006604aeb4, type: 3}
       propertyPath: item
       value: 
-      objectReference: {fileID: 11400000, guid: 83904957be406ea4b80dbb907b85f2aa, type: 2}
+      objectReference: {fileID: 11400000, guid: bce31318ebbab65468ae7a2a2a614f5d, type: 2}
     - target: {fileID: 6691563297113036283, guid: d2eb2010343c19e40b0f62006604aeb4, type: 3}
       propertyPath: m_Layer
       value: 7
@@ -2831,7 +2831,7 @@ PrefabInstance:
     - target: {fileID: 6691563298146351592, guid: d2eb2010343c19e40b0f62006604aeb4, type: 3}
       propertyPath: item
       value: 
-      objectReference: {fileID: 11400000, guid: 938039e5ce1dd2e4d96396ffc994ff1e, type: 2}
+      objectReference: {fileID: 11400000, guid: bce31318ebbab65468ae7a2a2a614f5d, type: 2}
     - target: {fileID: 6691563298146351592, guid: d2eb2010343c19e40b0f62006604aeb4, type: 3}
       propertyPath: showSlotGizmos
       value: 1
