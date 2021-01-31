@@ -36,7 +36,8 @@ public class EquipItemToRagdollTrigger : MonoBehaviour {
 
         rb.velocity = Vector2.zero;
         rb.bodyType = RigidbodyType2D.Kinematic;
-        obj.col.enabled = false;
+        foreach(var col in obj.colliders)
+            col.enabled = false;
         Equipped = obj;
     }
 
@@ -44,7 +45,8 @@ public class EquipItemToRagdollTrigger : MonoBehaviour {
         ignoreUntilExited.Add(Equipped);
 
         Equipped.rb.bodyType = RigidbodyType2D.Dynamic;
-        Equipped.col.enabled = true;
+        foreach(var col in Equipped.colliders)
+            col.enabled = true;
         Equipped.rb.velocity = velocity;
 
         Equipped = null;

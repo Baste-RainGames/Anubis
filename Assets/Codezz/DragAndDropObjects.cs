@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -8,7 +7,6 @@ public class DragAndDropObjects : MonoBehaviour {
     public Camera mainCamera;
     public Transform shelvesParent;
     public int numItemsToSpawn;
-    public LostAndFoundObject lostAndFoundPrefab;
 
     private TargetJoint2D joint;
     private LostAndFoundObject dragged;
@@ -72,7 +70,8 @@ public class DragAndDropObjects : MonoBehaviour {
         var spot = spots[index];
         spots.RemoveAt(index);
 
-        Instantiate(toSpawn.itemPrefab2D, spot, Quaternion.identity);
+        var instantiated = Instantiate(toSpawn.itemPrefab2D, spot, Quaternion.identity);
+        instantiated.item = toSpawn;
     }
 
     void Update() {
