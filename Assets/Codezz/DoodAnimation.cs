@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Animation_Player;
 using UnityEngine;
 using UnityEngine.AI;
@@ -10,21 +11,18 @@ public class DoodAnimation : MonoBehaviour {
     private string currentAnim;
     private float playActionUntil;
 
-    private Dictionary<string, float> clipDurations = new Dictionary<string, float>();
+    private Dictionary<string, float> _clipDurations;
+    public Dictionary<string, float> ClipDurations
+        => _clipDurations ??= anim.layers[0].states.ToDictionary(state => state.Name, state => state.Duration);
 
-    private void Start() {
-        foreach (var state in anim.layers[0].states) {
-            clipDurations[state.Name] = state.Duration;
-        }
-    }
 
     public float Play(string animation) {
-        if (clipDurations.TryGetValue(animation, out var duration)) {
+        if (ClipDurations.TryGetValue(animation, out var duration)) {
             playActionUntil = Time.time + duration;
             anim.Play(anim.GetStateIndex(animation));
         }
         else {
-            Debug.Log($"can't find {animation} in [{string.Join(", ", clipDurations.Keys)}]");
+            Debug.Log($"can't find {animation} in [{string.Join(", ", ClipDurations.Keys)}]");
         }
 
         return duration;
@@ -35,8 +33,8 @@ public class DoodAnimation : MonoBehaviour {
             return;
 
         var targetAnim = agent.velocity.magnitude > .01f ? "zomb-walk" : "zomb-idle";
-
         if (targetAnim != currentAnim) {
+            Debug.Log("revert to " + targetAnim);
             anim.Play(anim.GetStateIndex(targetAnim));
             currentAnim = targetAnim;
         }

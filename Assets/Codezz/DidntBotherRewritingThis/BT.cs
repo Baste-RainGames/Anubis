@@ -30,7 +30,7 @@ public static class BT<TData, TCommand> where TCommand : struct, BTCommand where
     public static BTNode Log(string msg) => new LogNode(() => msg);
     public static BTNode Log(Func<string> msg) => new LogNode(msg);
     public static BTNode RandomSequence(int[] weights = null) => new RandomSequenceNode(weights);
-    public static BTNode PlaySound(string sound, GameObject parentGO = null) => new PlaySoundNode(sound, parentGO);
+    public static BTNode Succeeder(BTNode child) => new SucceederNode().SetChild(child);
 
     // public static Func<bool> Or  (Func<bool> cond1, Func<bool> cond2) => () => cond1() || cond2();
     // public static Func<bool> And (Func<bool> cond1, Func<bool> cond2) => () => cond1() && cond2();
@@ -461,6 +461,22 @@ public static class BT<TData, TCommand> where TCommand : struct, BTCommand where
                 subtree.currentSubtree.ShowAsString(sb);
                 sb.Indents--;
             }
+        }
+    }
+
+    public class SucceederNode : Decorator {
+        protected override BTState OnTick() {
+            var result = child.Tick();
+            if (result == BTState.Continue)
+                return BTState.Continue;
+            return BTState.Success;
+        }
+
+        public override void ShowAsString(Action<BTNode, string> AppendLine, Action IncreaseIndentation, Action DecreaseIndentation) {
+            AppendLine(this, "Suceeder");
+            IncreaseIndentation();
+            child.ShowAsString(AppendLine, IncreaseIndentation, DecreaseIndentation);
+            DecreaseIndentation();
         }
     }
 

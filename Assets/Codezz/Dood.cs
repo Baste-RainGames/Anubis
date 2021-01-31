@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -30,13 +31,21 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
                 Sequence(
                     PlayerInAttackRange(),
                     Attack(),
-                    Wait(1f)
+                    TurnToFacePlayer()
                 ),
                 Sequence(
                     CanSeePlayer(),
+                    Succeeder(
+                        Sequence(
+                            DoesNotHaveAggro(),
+                            Aggro()
+                        )
+                    ),
+                    TurnToFacePlayer(),
                     MoveToPlayer()
                 ),
                 Sequence(
+                    NoteLostAggro(),
                     MoveRandom(),
                     WaitRandom(2, 2.5f)
                 )
@@ -44,6 +53,7 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
         );
 
         behaviourTree.data.agent = navMeshAgent;
+        behaviourTree.data.durationOfAnim = anim.ClipDurations;
     }
 
     private void Update() {
@@ -61,6 +71,7 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
             btData.playerPos = player.transform.position;
 
         btData.doodPos = transform.position;
+        btData.doodRot = transform.rotation;
         btData.doodAttackRange = attackRange;
         btData.doodVisionRange = visionRange;
         btData.attackDuration = timeBeforeHitbox;
@@ -75,8 +86,16 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
         if (btCommand.stopMoving)
             navMeshAgent.isStopped = true;
 
-        if (!string.IsNullOrEmpty(btCommand.playAnimation))
+        if (!string.IsNullOrEmpty(btCommand.playAnimation)) {
             anim.Play(btCommand.playAnimation);
+        }
+
+        if (btCommand.markAggroAs.HasValue)
+            behaviourTree.data.hasAggro = btCommand.markAggroAs.Value;
+
+        if (btCommand.turnTowards.HasValue)
+            transform.LookAt2D(btCommand.turnTowards.Value, Time.deltaTime * 180f);
+
     }
 
     public void ActivateHitbox() {
@@ -106,10 +125,14 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
 
     public struct DoodAIInput {
         public NavMeshAgent agent;
+        public Dictionary<string, float> durationOfAnim;
 
         public Vector3 playerPos;
         public Vector3 doodPos;
+        public Quaternion doodRot;
         public bool playerExists;
+
+        public bool hasAggro;
 
         public float doodAttackRange;
         public float doodVisionRange;
@@ -120,11 +143,15 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
         public Vector3? moveTo;
         public bool stopMoving;
         public string playAnimation;
+        public bool? markAggroAs;
+        public Vector3? turnTowards;
 
         public void Clear() {
             moveTo = null;
             stopMoving = false;
             playAnimation = null;
+            markAggroAs = null;
+            turnTowards = null;
         }
     }
 
@@ -164,6 +191,9 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
                 return BTState.Continue;
             }
 
+            if (Vector3.Distance(data.playerPos, data.doodPos) > data.doodVisionRange)
+                return BTState.Failure;
+
             if (Vector3.Distance(data.agent.destination, data.playerPos) > 1f) {
                 tree.command = new DoodAIOutput {
                     moveTo = data.playerPos
@@ -192,7 +222,7 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
     }
 
     public class AttackPlayerNode : BTNode {
-        private float startTime;
+        private float endTime;
 
         protected override void OnStartedTicking() {
             command = new DoodAIOutput {
@@ -200,11 +230,11 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
                 playAnimation = "enemy-punch",
             };
 
-            startTime = Time.time;
+            endTime = Time.time + data.durationOfAnim["enemy-punch"];
         }
 
         protected override BTState OnTick() {
-            if (Time.time - startTime > data.attackDuration)
+            if (Time.time > endTime)
                 return BTState.Success;
 
             return BTState.Continue;
@@ -272,6 +302,92 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
 
         public override void ShowAsString(Action<BTNode, string> AppendLine, Action IncreaseIndentation, Action DecreaseIndentation) {
             AppendLine(this, "Move randomly");
+        }
+    }
+
+
+    private BTNode DoesNotHaveAggro() => new CheckAggroNode();
+    private class CheckAggroNode : BTNode {
+        protected override BTState OnTick() {
+            if (!data.hasAggro)
+                return BTState.Success;
+            return BTState.Failure;
+        }
+
+        public override void ShowAsString(Action<BTNode, string> AppendLine, Action IncreaseIndentation, Action DecreaseIndentation) {
+            AppendLine(this, "Check Has Aggro");
+        }
+    }
+
+    private BTNode TurnToFacePlayer() => new TurnToFacePlayerNode();
+    private class TurnToFacePlayerNode : BTNode {
+        protected override BTState OnTick() {
+            if (Vector3.Distance(data.playerPos, data.doodPos) > data.doodVisionRange)
+                return BTState.Failure;
+
+            var angleToPlayer = FindAngleToPlayer();
+            if (angleToPlayer < 15f)
+                return BTState.Success;
+
+            command = new DoodAIOutput {
+                turnTowards = data.playerPos
+            };
+
+            return BTState.Continue;
+        }
+
+        private float FindAngleToPlayer() {
+            Vector3 target2D = new Vector3(data.playerPos.x, data.doodPos.y, data.playerPos.z);
+
+            Quaternion wantedRotation  = Quaternion.LookRotation(target2D - data.doodPos);
+
+            return Quaternion.Angle(wantedRotation, data.doodRot);
+        }
+
+        public override void ShowAsString(Action<BTNode, string> AppendLine, Action IncreaseIndentation, Action DecreaseIndentation) {
+            AppendLine(this, "Turn Towards Player");
+        }
+    }
+
+    private BTNode NoteLostAggro() => new NoteLostAggroNode();
+    private class NoteLostAggroNode : BTNode {
+        protected override BTState OnTick() {
+            command = new DoodAIOutput {
+                markAggroAs = false
+            };
+            return BTState.Success;
+        }
+
+        public override void ShowAsString(Action<BTNode, string> AppendLine, Action IncreaseIndentation, Action DecreaseIndentation) {
+            AppendLine(this, "Note Lost Aggro");
+        }
+    }
+
+    private BTNode Aggro() => new AggroNode();
+    private class AggroNode : BTNode {
+        private float endTime;
+
+        protected override void OnStartedTicking() {
+            command = new DoodAIOutput {
+                markAggroAs = true,
+                playAnimation = "zomb-aggro"
+            };
+
+            endTime = Time.time + data.durationOfAnim["zomb-aggro"];
+        }
+
+        protected override BTState OnTick() {
+            if (Time.time > endTime)
+                return BTState.Success;
+
+            return BTState.Continue;
+        }
+
+        public override void ShowAsString(Action<BTNode, string> AppendLine, Action IncreaseIndentation, Action DecreaseIndentation) {
+            if (tree.WasTickedLastFrame(index))
+                AppendLine(this, $"Aggro ({endTime - Time.time} seconds left)");
+            else
+                AppendLine(this, "Aggro");
         }
     }
 
