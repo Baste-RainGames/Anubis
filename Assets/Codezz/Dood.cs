@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -11,8 +12,12 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
     public DoodAnimation anim;
     public Hitbox hitbox;
 
+    public SkinnedMeshRenderer rend;
+    public Material damageMaterial;
+
     private NavMeshAgent navMeshAgent;
     private Player player;
+
 
     public float attackRange;
     public float visionRange;
@@ -20,10 +25,14 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
     public int maxHealth = 5;
     public int currentHealth = 5;
     private bool dead;
+    private Coroutine damageFlash;
+    private Material defaultMat;
 
     private void Start() {
         player = FindObjectOfType<Player>();
         navMeshAgent = GetComponent<NavMeshAgent>();
+
+        defaultMat = rend.sharedMaterial;
 
         behaviourTree = new BehaviourTree(
             Selector(
@@ -57,7 +66,7 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
     }
 
     private void Update() {
-        if (dead)
+        if (dead || anim.IsPlaying("zomb-oof"))
             return;
         UpdateAIData(ref behaviourTree.data);
         behaviourTree.Tick();
@@ -115,9 +124,31 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
     }
 
     public void OnHit(int damage) {
+        if (dead || anim.IsPlaying("zomb-oof"))
+            return;
+
         currentHealth -= damage;
+
+        if (damageFlash != null)
+            StopCoroutine(damageFlash);
+        damageFlash = StartCoroutine(DamageFlash());
+
         if (currentHealth <= 0)
             OnDeath();
+        else {
+            anim.Play("zomb-oof");
+            navMeshAgent.isStopped = true;
+        }
+    }
+
+    private IEnumerator DamageFlash() {
+        rend.sharedMaterial = damageMaterial;
+        yield return new WaitForSeconds(.1f);
+        rend.sharedMaterial = defaultMat;
+        yield return new WaitForSeconds(.1f);
+        rend.sharedMaterial = damageMaterial;
+        yield return new WaitForSeconds(.1f);
+        rend.sharedMaterial = defaultMat;
     }
 
     private void OnDeath() {
@@ -130,7 +161,7 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
     private void OnDestroy()
     {
         BattleManager.enemiesRemaining--;
-        
+
     }
 
     #region AI
