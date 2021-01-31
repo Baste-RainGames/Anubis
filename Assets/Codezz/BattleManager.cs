@@ -9,7 +9,8 @@ public class BattleManager : MonoBehaviour
     [AssetsOnly]
     public GameObject[] enemies;
 
-    public int enemiesToSpawn;
+    [Tooltip("This is float to increment på factor")]
+    public float enemiesToSpawn;
     public int growthNum = 0;
     public float growthFactor = 1;
     public float secondsBetweenEnemySpawned = 0;
@@ -22,9 +23,8 @@ public class BattleManager : MonoBehaviour
         enemiesRemaining = 0;
         while (true)
         {
-            yield return new WaitUntil(() => enemiesRemaining <= 0);
             enemiesRemaining = 0;
-            for (int i = 0; i < enemiesToSpawn; i++)
+            for (int i = 0; i < Mathf.FloorToInt(enemiesToSpawn); i++)
             {
                 var spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
                 var newEnemy = Instantiate(enemies[Random.Range(0, enemies.Length)], spawnPoint.position, spawnPoint.rotation);
@@ -34,7 +34,21 @@ public class BattleManager : MonoBehaviour
             }
 
 
+            yield return new WaitUntil(() => enemiesRemaining <= 0);
+            enemiesToSpawn *= growthFactor;
+            enemiesToSpawn += growthNum;
             yield return null;
+        }
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.K))
+        {
+            foreach (var dood in GameObject.FindObjectsOfType<Dood>())
+            {
+                dood.OnHit(99999);
+            }
         }
     }
 }
