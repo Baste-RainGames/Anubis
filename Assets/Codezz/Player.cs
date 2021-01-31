@@ -67,15 +67,6 @@ public class Player : MonoBehaviour
         rightLegSlot.showSlotGizmos = isShown;
     }
 
-    [FoldoutGroup("Item Slots")]
-    [Button]
-    public void ChangeAllEquipment(Item item)
-    {
-        foreach (var slot in ItemSlots)
-        {
-            slot.item = item;
-        }
-    }
     #endregion
 
     public int MaxHealth => 10;
@@ -96,7 +87,6 @@ public class Player : MonoBehaviour
         currentHealth = MaxHealth;
         if (!FindObjectOfType<HPUI>())
             Instantiate(Resources.Load("HP Canvas"));
-        if(false)
         foreach (var kvp in TransferDataBetweenScenes.equipedToSlotWhenExitingLostNFound) {
             var (id, item) = kvp;
 
@@ -114,6 +104,8 @@ public class Player : MonoBehaviour
 
             slot.item = item;
         }
+
+        UpdateEquippedItems();
     }
 
     public void Update()
