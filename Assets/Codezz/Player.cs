@@ -185,41 +185,45 @@ public class Player : MonoBehaviour
                 Destroy(slot.transform.GetChild(0).gameObject);
             if(slot.item != null)
             {
-                var equipedItem = Instantiate(slot.item.itemPrefab);
-                equipedItem.transform.parent = slot.transform;
+                var equipedItem = Instantiate(slot.item.itemPrefab, slot.transform, true);
                 equipedItem.layer = slot.gameObject.layer;
-                equipedItem.transform.localPosition = Vector3.zero + slot.item.offsetPosition;
-                equipedItem.transform.rotation = slot.transform.rotation * Quaternion.Euler(slot.item.offsetRotation);
+                equipedItem.transform.localPosition = slot.item.offsetPosition;
+                equipedItem.transform.localRotation = Quaternion.Euler(slot.item.offsetRotation);
+                equipedItem.transform.localScale    = slot.item.offsetScale;
                 ReplaceOnSpecialOcasions(slot, equipedItem);
             }
         }
     }
 
-    private void ReplaceOnSpecialOcasions(ItemSlot slot, GameObject equipedItem)
-    {
-        if (slot.item.name == "Ducky")
-        {
-
-            if (slot == headSlot || slot == torsoSlot)
-            {
-                equipedItem.transform.localScale = Vector3.one * 4;
-                if (slot == torsoSlot)
-                {
-                equipedItem.transform.localScale = new Vector3(8, 6, 6);
-                    equipedItem.transform.position += Vector3.down * .37f + -facingDirection * .1f;
-                    equipedItem.transform.forward = facingDirection + Vector3.down * .3f;
-                }
-                else
-                {
-                    equipedItem.transform.position += facingDirection * .1f;
-                    equipedItem.transform.forward = facingDirection + Vector3.up;
+    private void ReplaceOnSpecialOcasions(ItemSlot slot, GameObject equipedItem) {
+        switch (slot.item.name) {
+            case "Ducky": {
+                if (slot == headSlot || slot == torsoSlot) {
+                    equipedItem.transform.localScale = Vector3.one * 4;
+                    if (slot == torsoSlot) {
+                        equipedItem.transform.localScale = new Vector3(8, 6, 6);
+                        equipedItem.transform.position += Vector3.down * .37f + -facingDirection * .1f;
+                        equipedItem.transform.forward = facingDirection + Vector3.down * .3f;
+                    }
+                    else {
+                        equipedItem.transform.position += facingDirection * .1f;
+                        equipedItem.transform.forward = facingDirection + Vector3.up;
+                    }
                 }
 
+                break;
             }
+            case "Cleaver":
+                equipedItem.transform.localScale = new Vector3(1, 1.5f, 1);
+                break;
+            case "Bucket":
+                if (slot == headSlot) {
+                    equipedItem.transform.localPosition    = new Vector3(-0.0799999982f, 0.552999973f, 0.0590000004f);
+                    equipedItem.transform.localScale       = new Vector3(2.65541053f, 2.65541053f, 2.65541053f);
+                    equipedItem.transform.localEulerAngles = new Vector3(325.953278f, 180f, 172.122986f);
+                }
+                break;
         }
-        if(slot.item.name == "Cleaver")
-                equipedItem.transform.localScale = new Vector3(1, 1.5f,1);
-
     }
 
     private void AssignInputs()
