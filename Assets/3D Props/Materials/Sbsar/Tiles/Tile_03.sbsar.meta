@@ -25,11 +25,11 @@ ScriptedImporter:
       lightmapFlags: 4
       enableInstancingVariants: 0
       doubleSidedGI: 0
-      customRenderQueue: -1
+      customRenderQueue: 2000
       texEnvs:
       - name: _BaseMap
         texture: {fileID: 1062975998197758589, guid: 90dc7ec5878c29f4e874f6f90b2def63, type: 3}
-        scale: {x: 1, y: 1}
+        scale: {x: 0.5, y: 0.5}
         offset: {x: 0, y: 0}
       - name: _BumpMap
         texture: {fileID: 8507909168296816664, guid: 90dc7ec5878c29f4e874f6f90b2def63, type: 3}
@@ -53,7 +53,7 @@ ScriptedImporter:
         offset: {x: 0, y: 0}
       - name: _MainTex
         texture: {instanceID: 0}
-        scale: {x: 1, y: 1}
+        scale: {x: 0.5, y: 0.5}
         offset: {x: 0, y: 0}
       - name: _MetallicGlossMap
         texture: {fileID: -5952541420231965994, guid: 90dc7ec5878c29f4e874f6f90b2def63, type: 3}

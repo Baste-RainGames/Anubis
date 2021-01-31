@@ -127,7 +127,13 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
         Destroy(gameObject, dur);
     }
 
-#region AI
+    private void OnDestroy()
+    {
+        BattleManager.enemiesRemaining--;
+        
+    }
+
+    #region AI
 
     public struct DoodAIInput {
         public NavMeshAgent agent;
