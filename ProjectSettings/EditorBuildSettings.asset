@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Levulz/SteffenScene.unity
     guid: dbc1ad7c520589840bf4d45016fa0cb2
+  - enabled: 1
+    path: Assets/Levulz/EndScene.unity
+    guid: f1dd6a25d9fc43d47a58bcddba5d8862
   m_configObjects: {}
