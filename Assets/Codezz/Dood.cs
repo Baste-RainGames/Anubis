@@ -90,14 +90,15 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
     public void OnHit(int damage)
     {
         currentHealth -= damage;
+        Debug.Log(currentHealth);
         if (currentHealth <= 0)
             OnDeath();
     }
 
     private void OnDeath()
     {
-        //todo: should die prettier
-        Destroy(gameObject);
+        var dur = anim.Play("zomb-die");
+        Destroy(gameObject, dur);
     }
 
     #region AI

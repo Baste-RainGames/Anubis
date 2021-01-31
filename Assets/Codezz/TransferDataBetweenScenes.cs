@@ -5,7 +5,6 @@ public static class TransferDataBetweenScenes {
 
     [RuntimeInitializeOnLoadMethod]
     static void HandleReload() {
-        Debug.Log("Kay");
         equipedToSlotWhenExitingLostNFound.Clear();
     }
 

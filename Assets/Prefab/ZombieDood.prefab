@@ -200,7 +200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 6526588136821489121}
-  animator: {fileID: 6612053274786928365}
+  anim: {fileID: 6118597059264045771}
 --- !u!114 &3140882560411267146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,6 +214,143 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dood: {fileID: 6526588136821489120}
+--- !u!114 &6118597059264045771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6527516001672666285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a358015f49970a46b016ee678237f14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  versionNumber: 2
+  showInVisualizer: 0
+  layers:
+  - transitions: []
+    name: Default
+    startWeight: 1
+    mask: {fileID: 0}
+    type: 0
+    layersForEditor:
+    - m_Text: zomb-idle
+      m_Image: {fileID: 0}
+      m_Tooltip: 
+    - m_Text: zomb-ballespark
+      m_Image: {fileID: 0}
+      m_Tooltip: 
+    - m_Text: zomb-chase
+      m_Image: {fileID: 0}
+      m_Tooltip: 
+    - m_Text: zomb-die
+      m_Image: {fileID: 0}
+      m_Tooltip: 
+    - m_Text: zomb-aggro
+      m_Image: {fileID: 0}
+      m_Tooltip: 
+    - m_Text: zomb-kick
+      m_Image: {fileID: 0}
+      m_Tooltip: 
+    - m_Text: zomb-turn
+      m_Image: {fileID: 0}
+      m_Tooltip: 
+    - m_Text: zomb-walk
+      m_Image: {fileID: 0}
+      m_Tooltip: 
+    - m_Text: enemy-punch
+      m_Image: {fileID: 0}
+      m_Tooltip: 
+    serializedSingleClipStates:
+    - name: zomb-idle
+      hasUpdatedName: 1
+      guid:
+        guidSerialized: e295a5fe-1252-4d39-bed4-68a5935e317e
+      animationEvents: []
+      speed: 1
+      clip: {fileID: 7400000, guid: 5964919a4ed1c4c8b8f7a2f24e921b46, type: 2}
+    - name: zomb-ballespark
+      hasUpdatedName: 1
+      guid:
+        guidSerialized: 95f20e54-7237-4965-951b-93a4cb9bd5c0
+      animationEvents: []
+      speed: 1
+      clip: {fileID: 7400000, guid: 865e6f41c4dc141cd9526bc7536d75d0, type: 2}
+    - name: zomb-chase
+      hasUpdatedName: 1
+      guid:
+        guidSerialized: 536e999b-878c-4676-8212-ae358d4eda5c
+      animationEvents: []
+      speed: 1
+      clip: {fileID: 7400000, guid: 2a3f838c2326b4505aff99dac9bea66b, type: 2}
+    - name: zomb-die
+      hasUpdatedName: 1
+      guid:
+        guidSerialized: bbb48a1d-4fa1-41dc-bb15-fa7cfcdd3203
+      animationEvents: []
+      speed: 1
+      clip: {fileID: 7400000, guid: c3a203eac1826405cace6f4746b2c27a, type: 2}
+    - name: zomb-aggro
+      hasUpdatedName: 1
+      guid:
+        guidSerialized: 9a017725-6333-4395-ba7d-45ff96dbceaa
+      animationEvents: []
+      speed: 1
+      clip: {fileID: 7400000, guid: 023e7bdd30f0d41cc97d4bd131483d73, type: 2}
+    - name: zomb-kick
+      hasUpdatedName: 1
+      guid:
+        guidSerialized: 6d6df9e5-7942-41d3-8504-f97c344efa4a
+      animationEvents: []
+      speed: 1
+      clip: {fileID: 7400000, guid: ee7c3f4db1c1148d993b93f3526d6294, type: 2}
+    - name: zomb-turn
+      hasUpdatedName: 1
+      guid:
+        guidSerialized: cf514932-46fc-487d-8418-9086c4549e6a
+      animationEvents: []
+      speed: 1
+      clip: {fileID: 7400000, guid: 8ce041884765e457e980239448dea93d, type: 2}
+    - name: zomb-walk
+      hasUpdatedName: 1
+      guid:
+        guidSerialized: aad2577f-d0fc-407e-8155-3bf0bc649779
+      animationEvents: []
+      speed: 1
+      clip: {fileID: 7400000, guid: 3e86bf6325d134a3ead18ea75ca53f2b, type: 2}
+    - name: enemy-punch
+      hasUpdatedName: 1
+      guid:
+        guidSerialized: 545f474a-ad9e-4cea-b5ab-73f7cbf24f96
+      animationEvents: []
+      speed: 1
+      clip: {fileID: 7400000, guid: 1f074a365bd08498f85822b02f89c4a0, type: 2}
+    serializedBlendTree1Ds: []
+    serializedBlendTree2Ds: []
+    serializedSelectRandomStates: []
+    serializedSequences: []
+    serializedStateOrder:
+    - guidSerialized: e295a5fe-1252-4d39-bed4-68a5935e317e
+    - guidSerialized: 95f20e54-7237-4965-951b-93a4cb9bd5c0
+    - guidSerialized: 536e999b-878c-4676-8212-ae358d4eda5c
+    - guidSerialized: bbb48a1d-4fa1-41dc-bb15-fa7cfcdd3203
+    - guidSerialized: 9a017725-6333-4395-ba7d-45ff96dbceaa
+    - guidSerialized: 6d6df9e5-7942-41d3-8504-f97c344efa4a
+    - guidSerialized: cf514932-46fc-487d-8418-9086c4549e6a
+    - guidSerialized: aad2577f-d0fc-407e-8155-3bf0bc649779
+    - guidSerialized: 545f474a-ad9e-4cea-b5ab-73f7cbf24f96
+  defaultTransition:
+    type: 1
+    duration: 0
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    clip: {fileID: 0}
+  clipSwapCollections: []
 --- !u!1001 &6526588136722360723
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -281,7 +418,8 @@ PrefabInstance:
       propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 95035460417453950, guid: f9f6be802bd0fe3448c68a8b6f205bce, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f9f6be802bd0fe3448c68a8b6f205bce, type: 3}
 --- !u!1 &6527516001672666285 stripped
 GameObject:
@@ -291,10 +429,5 @@ GameObject:
 --- !u!4 &6521779791443941031 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4817502157356852, guid: f9f6be802bd0fe3448c68a8b6f205bce, type: 3}
-  m_PrefabInstance: {fileID: 6526588136722360723}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &6612053274786928365 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 95035460417453950, guid: f9f6be802bd0fe3448c68a8b6f205bce, type: 3}
   m_PrefabInstance: {fileID: 6526588136722360723}
   m_PrefabAsset: {fileID: 0}

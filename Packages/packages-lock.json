@@ -1,5 +1,21 @@
 {
   "dependencies": {
+    "com.baste.animationplayer": {
+      "version": "https://github.com/Baste-RainGames/AnimationPlayer.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.baste.playerloopinterface": "1.0.0"
+      },
+      "hash": "9e3612274c37a8d6f9087eb9c28e4770e66d7453"
+    },
+    "com.baste.playerloopinterface": {
+      "version": "https://github.com/Baste-RainGames/PlayerLoopInterface.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "deed8ab15d2fa1571de010333dbb93f24afb2f8e"
+    },
     "com.unity.ai.navigation.components": {
       "version": "https://github.com/Unity-Technologies/NavMeshComponents.git#package",
       "depth": 0,
