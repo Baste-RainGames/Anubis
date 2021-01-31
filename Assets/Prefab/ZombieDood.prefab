@@ -111,19 +111,6 @@ MonoBehaviour:
   box: {fileID: 2299940282212837899}
   debugHit: 1
   debugRenderer: {fileID: 3965890818446867772}
---- !u!114 &3140882560411267146
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6527516001672666285}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44db4449168d42f0a10aeb32d056d132, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dood: {fileID: 6526588136821489120}
 --- !u!1 &6526588136821489123
 GameObject:
   m_ObjectHideFlags: 0
@@ -135,6 +122,7 @@ GameObject:
   - component: {fileID: 6526588136821489122}
   - component: {fileID: 6526588136821489120}
   - component: {fileID: 6526588136821489121}
+  - component: {fileID: 2488841023575092501}
   m_Layer: 0
   m_Name: ZombieDood
   m_TagString: Untagged
@@ -170,11 +158,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa1ecec108484337be0bf7b10a4019e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 6612053274786928365}
+  anim: {fileID: 2488841023575092501}
   hitbox: {fileID: 4916742735964710398}
   attackRange: 4
   visionRange: 15
   timeBeforeHitbox: 0.3
+  maxHealth: 5
+  currentHealth: 5
 --- !u!195 &6526588136821489121
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -197,6 +187,33 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &2488841023575092501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6526588136821489123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9a84ef81d4e4498ac1e1fb8cb998bdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 6526588136821489121}
+  animator: {fileID: 6612053274786928365}
+--- !u!114 &3140882560411267146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6527516001672666285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44db4449168d42f0a10aeb32d056d132, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dood: {fileID: 6526588136821489120}
 --- !u!1001 &6526588136722360723
 PrefabInstance:
   m_ObjectHideFlags: 0

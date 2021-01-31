@@ -9,7 +9,7 @@ using static BT<Dood.DoodAIInput, Dood.DoodAIOutput>;
 public class /*HTML Rulez */Dood : MonoBehaviour {
 
     public BehaviourTree behaviourTree;
-    public Animator animator;
+    public DoodAnimation anim;
     public Hitbox hitbox;
 
     private NavMeshAgent navMeshAgent;
@@ -76,7 +76,7 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
             navMeshAgent.isStopped = true;
 
         if (!string.IsNullOrEmpty(btCommand.playAnimation))
-            animator.Play(btCommand.playAnimation);
+            anim.Play(btCommand.playAnimation);
     }
 
     public void ActivateHitbox() {
