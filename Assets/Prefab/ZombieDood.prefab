@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   box: {fileID: 2299940282212837899}
-  debugHit: 1
+  debugHit: 0
   debugRenderer: {fileID: 3965890818446867772}
 --- !u!1 &6526588136821489123
 GameObject:
