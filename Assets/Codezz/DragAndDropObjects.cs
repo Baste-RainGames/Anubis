@@ -13,6 +13,8 @@ public class DragAndDropObjects : MonoBehaviour {
     private List<Vector3> spawnSpots;
 
     private void Start() {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         var items = Resources.LoadAll<Item>("Itemz");
 
         if (items.Length == 0) {
