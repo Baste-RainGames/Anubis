@@ -104,12 +104,13 @@ public class Player : MonoBehaviour
             switch (rightHandSlot.item.itemType)
             {
                 case ItemType.Thrown:
-                    anim.Play("throw");
+                    anim.Play("player-throw-R");
                     freezePlayer = true;
                     rb.velocity = Vector3.zero;
                     Invoke("ThrowRight", .4f);
                     break;
                 case ItemType.Projectile:
+                    anim.Play("player-pew-R");
                     break;
                 case ItemType.Club:
                     anim.Play("player-club-R");
@@ -118,6 +119,7 @@ public class Player : MonoBehaviour
                     anim.Play("weapon_swing");
                     break;
                 case ItemType.Squeeker:
+                    anim.Play("player-squeek-R");
                     break;
                 default:
                     throw new Exception("Item type has no case yet");
@@ -132,6 +134,8 @@ public class Player : MonoBehaviour
                     Invoke("ThrowLeft", .4f);
                     break;
                 case ItemType.Projectile:
+                    anim.Play("player-pew-L");
+
                     break;
                 case ItemType.Club:
                     anim.Play("player-club-L");
@@ -140,6 +144,7 @@ public class Player : MonoBehaviour
                     anim.Play("player-slash-L");
                     break;
                 case ItemType.Squeeker:
+                    anim.Play("player-squeek-L");
                     break;
                 default:
                     throw new Exception("Item type has no case yet");
