@@ -32,7 +32,7 @@ public class Hitbox : MonoBehaviour {
 
     private IEnumerator DebugRoutine() {
         debugRenderer.enabled = true;
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(.2f);
         debugRenderer.enabled = false;
     }
 }
