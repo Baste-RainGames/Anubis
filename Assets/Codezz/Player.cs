@@ -8,6 +8,7 @@ using UnityEditor;
 public class Player : MonoBehaviour
 {
     public float maxSpeed = 5;
+    public float acceleration = 10f;
 
     Rigidbody rb;
 
@@ -58,8 +59,9 @@ public class Player : MonoBehaviour
     public int MaxHealth => 10;
     public int currentHealth;
     public float throwStrength = 7;
-    
-    private bool freezePlayer;
+
+    private bool attackFreeze;
+    private float damageFreezeUntil;
 
     private void Awake()
     {
@@ -67,7 +69,7 @@ public class Player : MonoBehaviour
     }
     private void Start()
     {
-        UpdateEquippedItems();  
+        UpdateEquippedItems();
         cam = Camera.main;
 
         currentHealth = MaxHealth;
@@ -96,8 +98,8 @@ public class Player : MonoBehaviour
 
     public void Update()
     {
-        AssignInputs();         
-        if (freezePlayer)
+        AssignInputs();
+        if (attackFreeze)
             return;
 
         if (rightAttackDown)
@@ -105,7 +107,7 @@ public class Player : MonoBehaviour
             {
                 case ItemType.Thrown:
                     anim.Play("player-throw-R");
-                    freezePlayer = true;
+                    attackFreeze = true;
                     rb.velocity = Vector3.zero;
                     Invoke("ThrowRight", .4f);
                     break;
@@ -129,7 +131,7 @@ public class Player : MonoBehaviour
             {
                 case ItemType.Thrown:
                     anim.Play("player-throw-L");
-                    freezePlayer = true;
+                    attackFreeze = true;
                     rb.velocity = Vector3.zero;
                     Invoke("ThrowLeft", .4f);
                     break;
@@ -167,7 +169,7 @@ public class Player : MonoBehaviour
         o.transform.position = positionToThrowFrom;
         o.AddComponent<Rigidbody>().velocity = (facingDirection + transform.up * .3f).normalized * throwStrength;
 
-        freezePlayer = false;
+        attackFreeze = false;
 
     }
 
@@ -201,7 +203,7 @@ public class Player : MonoBehaviour
                             equipedItem.transform.forward = facingDirection + Vector3.up;
 
                         }
-                        
+
                     }
             }
         }
@@ -220,7 +222,7 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (freezePlayer)
+        if (attackFreeze || Time.time < damageFreezeUntil)
             return;
         Move();
     }
@@ -240,10 +242,16 @@ public class Player : MonoBehaviour
             anim.SetFloat("MovementSpeed", 0);
         }
         rb.velocity = direction * maxSpeed + Vector3.up * rb.velocity.y;
+
+        // rb.AddForce(direction * acceleration);
     }
 
-    public void OnHit() {
+    public void OnHit(Transform attacker) {
+        var dir = attacker.forward.Normalized2D();
+        damageFreezeUntil = Time.time + .5f;
         currentHealth = Mathf.Max(0, currentHealth - 1);
+
+        rb.velocity = dir * 5f;
     }
 }
 

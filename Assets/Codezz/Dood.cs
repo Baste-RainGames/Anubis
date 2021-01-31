@@ -30,6 +30,7 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
                 Sequence(
                     PlayerInAttackRange(),
                     Attack(),
+                    Wait(2f),
                     TurnToFacePlayer()
                 ),
                 Sequence(
@@ -109,7 +110,7 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
         var hits = hitbox.PollHit();
         foreach (var hit in hits) {
             if (hit.gameObject.TryGetComponent<Player>(out var p))
-                p.OnHit();
+                p.OnHit(transform);
         }
     }
 

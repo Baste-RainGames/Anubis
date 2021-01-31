@@ -25,4 +25,9 @@ public static class TransformExtension {
 
         return Quaternion.Angle(wantedRotation, currentRotation);
     }
+
+    public static Vector3 Normalized2D(this Vector3 vector) {
+        vector.y = 0f;
+        return vector.normalized;
+    }
 }
