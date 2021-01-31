@@ -186,8 +186,23 @@ public class Player : MonoBehaviour
                 equipedItem.layer = slot.gameObject.layer;
                 equipedItem.transform.localPosition = Vector3.zero + slot.item.offsetPosition;
                 equipedItem.transform.rotation = slot.transform.rotation * Quaternion.Euler(slot.item.offsetRotation);
-                if (slot.item.name == "Ducky" && (slot == headSlot || slot == torsoSlot) )
-                    equipedItem.transform.localScale = Vector3.one * 4;
+                if (slot.item.name == "Ducky" )
+                    if (slot == headSlot || slot == torsoSlot)
+                    {
+                        equipedItem.transform.localScale = Vector3.one * 4;
+                        if (slot == torsoSlot)
+                        {
+                            equipedItem.transform.position += Vector3.down * .1f;
+                            equipedItem.transform.forward = facingDirection;
+                        }
+                        else
+                        {
+                            equipedItem.transform.position += facingDirection * .1f;
+                            equipedItem.transform.forward = facingDirection + Vector3.up;
+
+                        }
+                        
+                    }
             }
         }
     }
