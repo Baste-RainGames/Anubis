@@ -72,8 +72,7 @@ public class DragAndDropObjects : MonoBehaviour {
         var spot = spots[index];
         spots.RemoveAt(index);
 
-        var spawned = Instantiate(lostAndFoundPrefab, spot, Quaternion.identity);
-        spawned.SetItem(toSpawn);
+        Instantiate(toSpawn.itemPrefab2D, spot, Quaternion.identity);
     }
 
     void Update() {
