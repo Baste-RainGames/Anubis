@@ -12,6 +12,8 @@ public class DoodAnimation : MonoBehaviour {
     private float playActionUntil;
 
     private Dictionary<string, float> _clipDurations;
+    public bool IsTurning;
+
     public Dictionary<string, float> ClipDurations
         => _clipDurations ??= anim.layers[0].states.ToDictionary(state => state.Name, state => state.Duration);
 
@@ -32,11 +34,17 @@ public class DoodAnimation : MonoBehaviour {
         if (Time.time < playActionUntil || currentAnim == "zomb-die")
             return;
 
-        var targetAnim = agent.velocity.magnitude > .01f ? "zomb-walk" : "zomb-idle";
+        var targetAnim = FindTargetAnim();
         if (targetAnim != currentAnim) {
-            Debug.Log("revert to " + targetAnim);
             anim.Play(anim.GetStateIndex(targetAnim));
             currentAnim = targetAnim;
         }
+    }
+
+    private string FindTargetAnim() {
+        if (IsTurning)
+            return "zomb-turn";
+
+        return agent.velocity.magnitude > .01f ? "zomb-walk" : "zomb-idle";
     }
 }

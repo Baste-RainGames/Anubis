@@ -160,8 +160,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 2488841023575092501}
   hitbox: {fileID: 4916742735964710398}
-  attackRange: 4
-  visionRange: 15
+  attackRange: 3
+  visionRange: 10
   timeBeforeHitbox: 0.3
   maxHealth: 5
   currentHealth: 5
@@ -175,7 +175,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -201,6 +201,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 6526588136821489121}
   anim: {fileID: 6118597059264045771}
+  IsTurning: 0
 --- !u!114 &3140882560411267146
 MonoBehaviour:
   m_ObjectHideFlags: 0

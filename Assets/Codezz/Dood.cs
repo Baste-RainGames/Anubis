@@ -93,8 +93,13 @@ public class /*HTML Rulez */Dood : MonoBehaviour {
         if (btCommand.markAggroAs.HasValue)
             behaviourTree.data.hasAggro = btCommand.markAggroAs.Value;
 
-        if (btCommand.turnTowards.HasValue)
+        if (btCommand.turnTowards.HasValue) {
             transform.LookAt2D(btCommand.turnTowards.Value, Time.deltaTime * 180f);
+            anim.IsTurning = true;
+        }
+        else {
+            anim.IsTurning = false;
+        }
 
     }
 
