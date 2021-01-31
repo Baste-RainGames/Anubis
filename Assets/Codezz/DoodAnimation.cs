@@ -8,7 +8,6 @@ public class DoodAnimation : MonoBehaviour {
     public NavMeshAgent agent;
     public AnimationPlayer anim;
 
-    private string currentAnim;
     private float playActionUntil;
 
     private Dictionary<string, float> _clipDurations;
@@ -33,14 +32,12 @@ public class DoodAnimation : MonoBehaviour {
     }
 
     private void Update() {
-        if (Time.time < playActionUntil || currentAnim == "zomb-die")
+        if (Time.time < playActionUntil || anim.IsPlaying(anim.GetStateIndex("zomb-die")))
             return;
 
         var targetAnim = FindTargetAnim();
-        if (targetAnim != currentAnim) {
+        if (targetAnim != anim.GetPlayingState().Name)
             anim.Play(anim.GetStateIndex(targetAnim));
-            currentAnim = targetAnim;
-        }
     }
 
     private string FindTargetAnim() {
@@ -51,5 +48,9 @@ public class DoodAnimation : MonoBehaviour {
             return HasAggro ? "zomb-chase" : "zomb-walk";
         else
             return "zomb-idle";
+    }
+
+    public bool IsPlaying(string animName) {
+        return anim.IsPlaying(anim.GetStateIndex(animName));
     }
 }

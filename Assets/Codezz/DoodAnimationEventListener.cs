@@ -12,12 +12,10 @@ public class DoodAnimationEventListener : MonoBehaviour {
 
     public Dood dood;
     public void OnAttack1() {
-        Debug.Log("attack 1");
         dood.ActivateHitbox();
     }
 
     public void OnAttack2() {
-        Debug.Log("attack 2");
         dood.ActivateHitbox();
     }
 }

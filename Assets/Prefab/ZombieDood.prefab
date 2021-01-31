@@ -162,6 +162,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 2488841023575092501}
   hitbox: {fileID: 4916742735964710398}
+  rend: {fileID: 6591817632583911135}
+  damageMaterial: {fileID: 2100000, guid: 238bb867a20d39a40a0cadd71bf126c3, type: 2}
   attackRange: 3
   visionRange: 10
   timeBeforeHitbox: 0.3
@@ -296,6 +298,9 @@ MonoBehaviour:
     - m_Text: enemy-punch
       m_Image: {fileID: 0}
       m_Tooltip: 
+    - m_Text: zomb-oof
+      m_Image: {fileID: 0}
+      m_Tooltip: 
     serializedSingleClipStates:
     - name: zomb-idle
       hasUpdatedName: 1
@@ -368,6 +373,13 @@ MonoBehaviour:
         minWeight: 0
       speed: 1
       clip: {fileID: 7400000, guid: 1f074a365bd08498f85822b02f89c4a0, type: 2}
+    - name: zomb-oof
+      hasUpdatedName: 1
+      guid:
+        guidSerialized: 81e22e99-9815-47c2-9233-a78b7651b57d
+      animationEvents: []
+      speed: 1
+      clip: {fileID: 7400000, guid: a35f0f4c7630446c4b57560e26d41b87, type: 2}
     serializedBlendTree1Ds: []
     serializedBlendTree2Ds: []
     serializedSelectRandomStates: []
@@ -382,6 +394,7 @@ MonoBehaviour:
     - guidSerialized: cf514932-46fc-487d-8418-9086c4549e6a
     - guidSerialized: aad2577f-d0fc-407e-8155-3bf0bc649779
     - guidSerialized: 545f474a-ad9e-4cea-b5ab-73f7cbf24f96
+    - guidSerialized: 81e22e99-9815-47c2-9233-a78b7651b57d
   defaultTransition:
     type: 1
     duration: 0
@@ -471,5 +484,10 @@ GameObject:
 --- !u!4 &6521779791443941031 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4817502157356852, guid: f9f6be802bd0fe3448c68a8b6f205bce, type: 3}
+  m_PrefabInstance: {fileID: 6526588136722360723}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &6591817632583911135 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 137868186108260172, guid: f9f6be802bd0fe3448c68a8b6f205bce, type: 3}
   m_PrefabInstance: {fileID: 6526588136722360723}
   m_PrefabAsset: {fileID: 0}
