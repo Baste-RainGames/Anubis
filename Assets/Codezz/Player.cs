@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Sirenix.OdinInspector;
 using UnityEditor;
 
@@ -269,6 +270,13 @@ public class Player : MonoBehaviour
         currentHealth = Mathf.Max(0, currentHealth - 1);
 
         rb.velocity = dir * 5f;
+        if (currentHealth <= 0)
+            OnDeath();
+    }
+
+    private void OnDeath()
+    {
+        SceneManager.LoadScene("EndScene");
     }
 }
 
