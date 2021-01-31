@@ -3,7 +3,17 @@ guid: 6ed14facd725f194e88d431e46ba766b
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Pineapple_Base
+    second: {fileID: 3553241170130562213, guid: 637137436e880fb4d819f113c80461a3, type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Pineapple_Leaf
+    second: {fileID: 4451812531232425697, guid: e9dc2e25f3763424dadfc60717bb4088, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

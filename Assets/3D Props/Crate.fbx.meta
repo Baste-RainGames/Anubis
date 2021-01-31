@@ -3,7 +3,17 @@ guid: 666f5d8c3c0dfeb48bf963fc470defc7
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Crate_Edges
+    second: {fileID: 8325796250661042041, guid: e7f50af21e4f8da4d8c7b63ac32644ed, type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Crate_Inside
+    second: {fileID: -2586883547715022970, guid: 99c7f6a8186e8924f8589e1b1fda654c, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

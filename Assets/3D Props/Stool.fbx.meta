@@ -3,7 +3,17 @@ guid: 9d900d67a2d4e7e4285c71dc52caf2ab
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Stool_Legs
+    second: {fileID: 5801937115732581261, guid: 6bee1f313822a7e4cbeba7e0c43094e2, type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Stool_Top
+    second: {fileID: 7244346800306095000, guid: dfc03af6db8b9834588365e0a87bcbd9, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

@@ -260,10 +260,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -147645698251212975, guid: ad4e303311b99aa4c965a05b094a4d0c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2283337969661564415, guid: 6f92ac024dc38424f93daa4a3f825cc8, type: 3}
+    - target: {fileID: 888387132414107116, guid: ad4e303311b99aa4c965a05b094a4d0c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 5905235431387072813, guid: 0dedee9c521140241956de39eb1b13ab, type: 3}
     - target: {fileID: 919132149155446097, guid: ad4e303311b99aa4c965a05b094a4d0c, type: 3}
       propertyPath: m_Name
       value: Briefcase
       objectReference: {fileID: 0}
+    - target: {fileID: 985049316922086204, guid: ad4e303311b99aa4c965a05b094a4d0c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 6946981437794514829, guid: 639e67bbc0c1f884ebd75d37a3b136ef, type: 3}
+    - target: {fileID: 7036489430783279163, guid: ad4e303311b99aa4c965a05b094a4d0c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: -37947850364391767, guid: 90c637206ec9dec4a9980dcddccea7a6, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad4e303311b99aa4c965a05b094a4d0c, type: 3}
 --- !u!4 &1815321186276748427 stripped
