@@ -4,7 +4,8 @@ using UnityEditor;
 
 public class ItemSlot : MonoBehaviour
 {
-    public bool showSlotGizmos;
+    [ShowInInspector]
+    public static bool showSlotGizmos;
 
     //Todo: Om vi legger til Offset per item, her skal Item referansen for preview
     public Item item;

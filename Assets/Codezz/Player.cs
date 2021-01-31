@@ -31,7 +31,6 @@ public class Player : MonoBehaviour
     [InlineEditor]
     public ItemSlot leftHandSlot, rightHandSlot, headSlot, torsoSlot, leftArmSlot, rightArmSlot, leftLegSlot, rightLegSlot;
 
-    [SerializeField]
     List<ItemSlot> _itemSlots = new List<ItemSlot>();
     List<ItemSlot> ItemSlots
     {
@@ -53,19 +52,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    [FoldoutGroup("Item Slots")]
-    [Button]
-    void ToggleAllGizmos(bool isShown = true)
-    {
-        leftHandSlot.showSlotGizmos = isShown;
-        rightHandSlot.showSlotGizmos = isShown;
-        headSlot.showSlotGizmos = isShown;
-        torsoSlot.showSlotGizmos = isShown;
-        leftArmSlot.showSlotGizmos = isShown;
-        rightArmSlot.showSlotGizmos = isShown;
-        leftLegSlot.showSlotGizmos = isShown;
-        rightLegSlot.showSlotGizmos = isShown;
-    }
 
     #endregion
 
@@ -126,8 +112,32 @@ public class Player : MonoBehaviour
                 case ItemType.Projectile:
                     break;
                 case ItemType.Club:
+                    anim.Play("player-club-R");
+                    break;
                 case ItemType.Sharp:
                     anim.Play("weapon_swing");
+                    break;
+                case ItemType.Squeeker:
+                    break;
+                default:
+                    throw new Exception("Item type has no case yet");
+            }
+        if (leftAttackDown)
+            switch (rightHandSlot.item.itemType)
+            {
+                case ItemType.Thrown:
+                    //anim.Play("throw");
+                    freezePlayer = true;
+                    rb.velocity = Vector3.zero;
+                    Invoke("ThrowLeft", .4f);
+                    break;
+                case ItemType.Projectile:
+                    break;
+                case ItemType.Club:
+                    anim.Play("player-club-L");
+                    break;
+                case ItemType.Sharp:
+                    anim.Play("player-slash-L");
                     break;
                 case ItemType.Squeeker:
                     break;
@@ -156,7 +166,7 @@ public class Player : MonoBehaviour
 
     }
 
-    [ContextMenu("Test equip")]
+    [ContextMenu("Update Equipment")]
     private void UpdateEquippedItems()
     {
         for (int i = 0; i < ItemSlots.Count; i++)
